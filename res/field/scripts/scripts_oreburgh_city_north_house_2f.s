@@ -23,7 +23,7 @@ OreburghCityNorthHouse2F_Collector:
     CheckPartyHasSpecies VAR_RESULT, SPECIES_GEODUDE
     GoToIfEq VAR_RESULT, FALSE, OreburghCityNorthHouse2F_HowAboutShowingMeAPokemonCalledGeodude
     Message OreburghCityNorthHouse2F_Text_ThatsAGeodudeThisIsATokenOfMyThanks
-    SetVar VAR_0x8004, ITEM_HEAL_BALL
+    SetVar VAR_0x8004, ITEM_POTION
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, OreburghCityNorthHouse2F_BagIsFull
     SetFlag FLAG_RECEIVED_OREBURGH_CITY_NORTH_HOUSE_2F_HEAL_BALL

@@ -127,7 +127,7 @@ JubilifeTV1F_SetLotteryPrize:
     End
 
 JubilifeTV1F_SetFourthPrize:
-    SetVar VAR_0x8003, ITEM_ULTRA_BALL
+    SetVar VAR_0x8003, ITEM_HYPER_POTION
     GoTo JubilifeTV1F_GiveLotteryPrize
     End
 
@@ -144,7 +144,7 @@ JubilifeTV1F_SetFirstPrize:
     GoTo JubilifeTV1F_GiveLotteryPrize
 
 JubilifeTV1F_SetJackpotPrize:
-    SetVar VAR_0x8003, ITEM_MASTER_BALL
+    SetVar VAR_0x8003, ITEM_FULL_RESTORE
     GoTo JubilifeTV1F_GiveLotteryPrize
 
 JubilifeTV1F_GiveLotteryPrize:

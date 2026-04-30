@@ -21,9 +21,9 @@ OreburghCityNorthwestHouse2F_Lass:
     LockAll
     FacePlayer
     GoToIfSet FLAG_RECEIVED_OREBURGH_CITY_NORTHWEST_HOUSE_2F_DUSK_BALL, OreburghCityNorthwestHouse2F_TheDuskBallIsAPokeBallDesignedForUseInDarkness
-    BufferItemName 0, ITEM_DUSK_BALL
+    BufferItemName 0, ITEM_SUPER_POTION
     Message OreburghCityNorthwestHouse2F_Text_HereTakeThisIfYoudLike
-    SetVar VAR_0x8004, ITEM_DUSK_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, OreburghCityNorthwestHouse2F_BagIsFull
     SetFlag FLAG_RECEIVED_OREBURGH_CITY_NORTHWEST_HOUSE_2F_DUSK_BALL

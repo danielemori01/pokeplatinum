@@ -18,7 +18,7 @@ OreburghCityEastHouse2F_Youngster:
     FacePlayer
     GoToIfSet FLAG_RECEIVED_OREBURGH_CITY_EAST_HOUSE_2F_GREAT_BALL, OreburghCityEastHouse2F_YouKnowHowPokemonStayInsideTheirPokeBalls
     Message OreburghCityEastHouse2F_Text_HereIWantYouToHaveThis
-    SetVar VAR_0x8004, ITEM_GREAT_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, OreburghCityEastHouse2F_BagIsFull
     Common_GiveItemQuantity

@@ -34,7 +34,7 @@ Route222EastHouse_Fisherman:
     GoToIfEq VAR_RESULT, SIZE_CONTEST_SAME_SIZE, Route222EastHouse_TiedRecord
     BufferPartyPokemonSize 0, 1, VAR_0x8002
     Message Route222EastHouse_Text_BetterThanInMyDream
-    SetVar VAR_0x8004, ITEM_NET_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route222EastHouse_BagFull
     Common_GiveItemQuantity

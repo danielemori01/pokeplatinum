@@ -345,7 +345,7 @@ VisibleItems_Route203_Repel:
     End
 
 VisibleItems_Route203_PokeBall:
-    SetVar VAR_0x8008, ITEM_POKE_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -429,7 +429,7 @@ VisibleItems_ValleyWindworksOutside_TM24:
     End
 
 VisibleItems_Route205South_HealBall:
-    SetVar VAR_0x8008, ITEM_HEAL_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -453,7 +453,7 @@ VisibleItems_EternaForest_ParlyzHeal:
     End
 
 VisibleItems_EternaForest_NetBall:
-    SetVar VAR_0x8008, ITEM_NET_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -591,7 +591,7 @@ VisibleItems_WaywardCaveB1F_GripClaw:
     End
 
 VisibleItems_Route207_PokeBall:
-    SetVar VAR_0x8008, ITEM_POKE_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -627,7 +627,7 @@ VisibleItems_Route208_Carbos:
     End
 
 VisibleItems_Route208_GreatBall:
-    SetVar VAR_0x8008, ITEM_GREAT_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -681,7 +681,7 @@ VisibleItems_PokemonMansionOffice_TM87:
     End
 
 VisibleItems_PokemonMansionMaidsRoom_LuxuryBall:
-    SetVar VAR_0x8008, ITEM_LUXURY_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -735,7 +735,7 @@ VisibleItems_GreatMarsh1_YellowShard:
     End
 
 VisibleItems_GreatMarsh1_PokeBall:
-    SetVar VAR_0x8008, ITEM_POKE_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -747,13 +747,13 @@ VisibleItems_GreatMarsh2_BlueShard:
     End
 
 VisibleItems_GreatMarsh4_PokeBall:
-    SetVar VAR_0x8008, ITEM_POKE_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
 VisibleItems_GreatMarsh3_GreatBall:
-    SetVar VAR_0x8008, ITEM_GREAT_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -765,7 +765,7 @@ VisibleItems_GreatMarsh4_GreenShard:
     End
 
 VisibleItems_GreatMarsh5_GreatBall:
-    SetVar VAR_0x8008, ITEM_GREAT_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -837,7 +837,7 @@ VisibleItems_ValorLakefront_TM85:
     End
 
 VisibleItems_ValorLakefront_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -849,7 +849,7 @@ VisibleItems_EternaForest_Ether:
     End
 
 VisibleItems_Route209_GreatBall:
-    SetVar VAR_0x8008, ITEM_GREAT_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -945,7 +945,7 @@ VisibleItems_Route221_PureIncense:
     End
 
 VisibleItems_Route210South_NestBall:
-    SetVar VAR_0x8008, ITEM_NEST_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1107,7 +1107,7 @@ VisibleItems_Route220_MaxRepel:
     End
 
 VisibleItems_Route221_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1173,7 +1173,7 @@ VisibleItems_IronIslandB2FRightRoom_TM23:
     End
 
 VisibleItems_IronIslandB2FLeftRoom_DuskBall:
-    SetVar VAR_0x8008, ITEM_DUSK_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1185,7 +1185,7 @@ VisibleItems_IronIslandB2FLeftRoom_MaxPotion:
     End
 
 VisibleItems_IronIslandB2FLeftRoom_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1251,7 +1251,7 @@ VisibleItems_MtCoronetB1F_LightClay:
     End
 
 VisibleItems_MtCoronetB1F_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1311,7 +1311,7 @@ VisibleItems_Route217_Iron:
     End
 
 VisibleItems_AcuityLakefront_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1401,13 +1401,13 @@ VisibleItems_SunyshoreCity_Thunderstone:
     End
 
 VisibleItems_Route223_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
 VisibleItems_Route223_DiveBall:
-    SetVar VAR_0x8008, ITEM_DIVE_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1659,7 +1659,7 @@ VisibleItems_StarkMountainRoom2_RareCandy:
     End
 
 VisibleItems_StarkMountainRoom2_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1743,7 +1743,7 @@ VisibleItems_FloaromaMeadow_LeafStone:
     End
 
 VisibleItems_OreburghMineB1F_PokeBall:
-    SetVar VAR_0x8008, ITEM_POKE_BALL
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2037,7 +2037,7 @@ VisibleItems_FuegoIronworksBuilding_YellowShard:
     End
 
 VisibleItems_FloaromaMeadow_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2091,7 +2091,7 @@ VisibleItems_Route217_BlueShard:
     End
 
 VisibleItems_Route217_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2127,7 +2127,7 @@ VisibleItems_GalacticHQ2F_GreenShard:
     End
 
 VisibleItems_Route222_QuickBall:
-    SetVar VAR_0x8008, ITEM_QUICK_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2151,7 +2151,7 @@ VisibleItems_Route224_Upgrade:
     End
 
 VisibleItems_Route224_RepeatBall:
-    SetVar VAR_0x8008, ITEM_REPEAT_BALL
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2163,7 +2163,7 @@ VisibleItems_Route224_PPMax:
     End
 
 VisibleItems_Route224_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2193,7 +2193,7 @@ VisibleItems_AcuityLakefront_ReaperCloth:
     End
 
 VisibleItems_SnowpointCity_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2205,7 +2205,7 @@ VisibleItems_SurvivalArea_RedShard:
     End
 
 VisibleItems_VictoryRoadB1F_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2253,7 +2253,7 @@ VisibleItems_CelesticTown_DragonFang:
     End
 
 VisibleItems_Route207_TimerBall:
-    SetVar VAR_0x8008, ITEM_TIMER_BALL
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

@@ -132,7 +132,7 @@ Route202_LucasHereIllGiveYouFivePokeballsToGetYouStarted:
     GoTo Route202_GivePokeballs
 
 Route202_GivePokeballs:
-    SetVar VAR_0x8004, ITEM_POKE_BALL
+    SetVar VAR_0x8004, ITEM_POTION
     SetVar VAR_0x8005, 5
     Common_GiveItemQuantity
     GetPlayerGender VAR_RESULT

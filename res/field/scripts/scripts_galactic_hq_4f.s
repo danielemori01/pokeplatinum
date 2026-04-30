@@ -40,7 +40,7 @@ GalacticHQ4F_Cyrus:
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, GalacticHQ4F_BlackOut
     Message GalacticHQ4F_Text_YouAreIndeedStrong
-    SetVar VAR_0x8004, ITEM_MASTER_BALL
+    SetVar VAR_0x8004, ITEM_FULL_RESTORE
     SetVar VAR_0x8005, 1
     CanFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT
     CallIfEq VAR_RESULT, TRUE, GalacticHQ4F_GiveMasterBall

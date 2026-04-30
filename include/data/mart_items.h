@@ -12,9 +12,6 @@ typedef struct {
 } PokeMartCommonItem;
 
 const PokeMartCommonItem PokeMartCommonItems[] = {
-    { ITEM_POKE_BALL, 0x1 },
-    { ITEM_GREAT_BALL, 0x3 },
-    { ITEM_ULTRA_BALL, 0x4 },
     { ITEM_POTION, 0x1 },
     { ITEM_SUPER_POTION, 0x2 },
     { ITEM_HYPER_POTION, 0x4 },
@@ -35,29 +32,21 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 
 const u16 JubilifeMartSpecialties[] = {
     ITEM_AIR_MAIL,
-    ITEM_HEAL_BALL,
     SHOP_ITEM_END
 };
 
 const u16 OreburghMartSpecialties[] = {
     ITEM_TUNNEL_MAIL,
-    ITEM_HEAL_BALL,
-    ITEM_NET_BALL,
     SHOP_ITEM_END
 };
 
 const u16 FloaromaMartSpecialties[] = {
     ITEM_BLOOM_MAIL,
-    ITEM_HEAL_BALL,
-    ITEM_NET_BALL,
     SHOP_ITEM_END
 };
 
 const u16 EternaMartSpecialties[] = {
     ITEM_AIR_MAIL,
-    ITEM_HEAL_BALL,
-    ITEM_NET_BALL,
-    ITEM_NEST_BALL,
     SHOP_ITEM_END
 };
 
@@ -71,25 +60,16 @@ const u16 EternaHerbShopStock[] = {
 
 const u16 HearthomeMartSpecialties[] = {
     ITEM_HEART_MAIL,
-    ITEM_HEAL_BALL,
-    ITEM_NET_BALL,
-    ITEM_NEST_BALL,
     SHOP_ITEM_END
 };
 
 const u16 SolaceonMartSpecialties[] = {
     ITEM_AIR_MAIL,
-    ITEM_NET_BALL,
-    ITEM_NEST_BALL,
-    ITEM_DUSK_BALL,
     SHOP_ITEM_END
 };
 
 const u16 PastoriaMartSpecialties[] = {
     ITEM_AIR_MAIL,
-    ITEM_NEST_BALL,
-    ITEM_DUSK_BALL,
-    ITEM_QUICK_BALL,
     SHOP_ITEM_END
 };
 
@@ -109,9 +89,6 @@ const u16 VeilstoneDeptStoreStock_1F_RIGHT[] = {
 };
 
 const u16 VeilstoneDeptStoreStock_1F_LEFT[] = {
-    ITEM_POKE_BALL,
-    ITEM_GREAT_BALL,
-    ITEM_ULTRA_BALL,
     ITEM_ESCAPE_ROPE,
     ITEM_POKE_DOLL,
     ITEM_REPEL,
@@ -169,43 +146,25 @@ const u16 VeilstoneDeptStoreStock_3F_DOWN[] = {
 
 const u16 CelesticMartSpecialties[] = {
     ITEM_AIR_MAIL,
-    ITEM_DUSK_BALL,
-    ITEM_QUICK_BALL,
-    ITEM_TIMER_BALL,
     SHOP_ITEM_END
 };
 
 const u16 SnowpointMartSpecialties[] = {
     ITEM_SNOW_MAIL,
-    ITEM_DUSK_BALL,
-    ITEM_QUICK_BALL,
-    ITEM_TIMER_BALL,
     SHOP_ITEM_END
 };
 
 const u16 CanalaveMartSpecialties[] = {
     ITEM_AIR_MAIL,
-    ITEM_QUICK_BALL,
-    ITEM_TIMER_BALL,
-    ITEM_REPEAT_BALL,
     SHOP_ITEM_END
 };
 
 const u16 SunyshoreMartSpecialties[] = {
     ITEM_STEEL_MAIL,
-    ITEM_LUXURY_BALL,
     SHOP_ITEM_END
 };
 
 const u16 PokemonLeagueMartSpecialties[] = {
-    ITEM_HEAL_BALL,
-    ITEM_NET_BALL,
-    ITEM_NEST_BALL,
-    ITEM_DUSK_BALL,
-    ITEM_QUICK_BALL,
-    ITEM_TIMER_BALL,
-    ITEM_REPEAT_BALL,
-    ITEM_LUXURY_BALL,
     SHOP_ITEM_END
 };
 

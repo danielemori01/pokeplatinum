@@ -70,51 +70,51 @@ SolaceonTownPokemonNewsPress_SetReward:
     End
 
 SolaceonTownPokemonNewsPress_SetRewardUltraBall:
-    SetVar VAR_0x8004, ITEM_ULTRA_BALL
+    SetVar VAR_0x8004, ITEM_HYPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardGreatBall:
-    SetVar VAR_0x8004, ITEM_GREAT_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardPokeBall:
-    SetVar VAR_0x8004, ITEM_POKE_BALL
+    SetVar VAR_0x8004, ITEM_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardNetBall:
-    SetVar VAR_0x8004, ITEM_NET_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardDiveBall:
-    SetVar VAR_0x8004, ITEM_DIVE_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardNestBall:
-    SetVar VAR_0x8004, ITEM_NEST_BALL
+    SetVar VAR_0x8004, ITEM_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardRepeatBall:
-    SetVar VAR_0x8004, ITEM_REPEAT_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardTimerBall:
-    SetVar VAR_0x8004, ITEM_TIMER_BALL
+    SetVar VAR_0x8004, ITEM_HYPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardLuxuryBall:
-    SetVar VAR_0x8004, ITEM_LUXURY_BALL
+    SetVar VAR_0x8004, ITEM_HYPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardDuskBall:
-    SetVar VAR_0x8004, ITEM_DUSK_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardHealBall:
-    SetVar VAR_0x8004, ITEM_HEAL_BALL
+    SetVar VAR_0x8004, ITEM_POTION
     Return
 
 SolaceonTownPokemonNewsPress_SetRewardQuickBall:
-    SetVar VAR_0x8004, ITEM_QUICK_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     Return
 
 SolaceonTownPokemonNewsPress_GiveRewardIHopeYoullHelpAgainTomorrow:

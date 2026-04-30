@@ -161,8 +161,10 @@ FieldBattleDTO *FieldBattleDTO_NewCatchingTutorial(enum HeapID heapID, const Fie
     SetBackgroundAndTerrain(dto, fieldSystem);
     Options_Copy(options, dto->options);
     dto->timeOfDay = FieldSystem_GetTimeOfDay(fieldSystem);
+    // This bag is a temporary throw-away; it never reaches the player's inventory.
+    // The tutorial state machine requires at least one item in BATTLE_POCKET_INDEX_POKE_BALLS
+    // to navigate to and "use" — without it BattleBagTask_CatchTutorial gets ITEM_NONE and hangs.
     Bag_TryAddItem(dto->bag, ITEM_POKE_BALL, 20, heapID);
-
     mon = Pokemon_New(heapID);
     Pokemon_InitWith(mon, SystemVars_GetPlayerCounterpartStarter(SaveData_GetVarsFlags(fieldSystem->saveData)), 5, INIT_IVS_RANDOM, FALSE, 0, OTID_NOT_SHINY, 0);
     Party_AddPokemon(dto->parties[BATTLER_PLAYER_1], mon);

@@ -35,7 +35,7 @@ CelesticTownPokecenter1F_PokefanM:
 
 CelesticTownPokecenter1F_GiveGreatBall:
     Message CelesticTownPokecenter1F_Text_YouCanHaveThis
-    SetVar VAR_0x8004, ITEM_GREAT_BALL
+    SetVar VAR_0x8004, ITEM_SUPER_POTION
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, CelesticTownPokecenter1F_BagIsFull
     Common_GiveItemQuantity

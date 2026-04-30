@@ -1258,23 +1258,6 @@ static u8 Shop_FinishPurchase(ShopMenu *shopMenu)
             SystemVars_IncrementDepartmentStoreBuyCount(shopMenu->varsFlags);
         }
 
-        if (((shopMenu->martType == MART_TYPE_NORMAL) || (shopMenu->martType == MART_TYPE_FRONTIER)) && (shopMenu->itemId == ITEM_POKE_BALL) && (shopMenu->itemAmount >= 10)) {
-            if (Bag_TryAddItem(shopMenu->destInventory, ITEM_PREMIER_BALL, 1, HEAP_ID_FIELD2) == TRUE) {
-                String *string = MessageLoader_GetNewString(shopMenu->msgLoader, pl_msg_00000543_00010);
-
-                StringTemplate_Format(shopMenu->strTemplate, shopMenu->string, string);
-                String_Free(string);
-                Window_FillTilemap(&shopMenu->windows[SHOP_WINDOW_MESSAGE], 15);
-
-                shopMenu->fieldMsgPrinterId = FieldMessage_Print(&shopMenu->windows[SHOP_WINDOW_MESSAGE], shopMenu->string, shopMenu->options, TRUE);
-
-                GameRecords *records = SaveData_GetGameRecords(shopMenu->saveData);
-                GameRecords_IncrementRecordValue(records, RECORD_UNK_050);
-
-                return SHOP_STATE_FINISH_FREE_PREMIER;
-            }
-        }
-
         Window_EraseMessageBox(&shopMenu->windows[SHOP_WINDOW_MESSAGE], FALSE);
         Shop_SetScrollSpritesPositionXY(shopMenu, FALSE);
         Sprite_SetDrawFlag(shopMenu->sprites[SHOP_SPRITE_SCROLL_ARROW_UP], shopMenu->spriteDrawFlags[SHOP_SPRITE_SCROLL_ARROW_UP]);
