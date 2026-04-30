@@ -1772,6 +1772,11 @@ static BOOL BtlCmd_TryFaintMon(BattleSystem *battleSys, BattleContext *battleCtx
         battleCtx->battleStatusMask |= (FlagIndex(battler) << SYSCTL_MON_FAINTED_SHIFT);
         battleCtx->totalFainted[battler]++;
 
+        if (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_PLAYER) {
+            Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
+            mon->box.isDead = 1;
+        }
+
         BattleScript_UpdateFriendship(battleSys, battleCtx, battler);
     }
 
