@@ -543,7 +543,7 @@ VisibleItems_WaywardCave1F_TM32:
     End
 
 VisibleItems_WaywardCave1F_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -597,7 +597,7 @@ VisibleItems_Route207_PokeBall:
     End
 
 VisibleItems_Route207_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -723,7 +723,7 @@ VisibleItems_Route212South_TM06:
     End
 
 VisibleItems_Route212South_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -801,7 +801,7 @@ VisibleItems_Route213_YellowShard:
     End
 
 VisibleItems_Route213_MaxRevive:
-    SetVar VAR_0x8008, ITEM_MAX_REVIVE
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -891,7 +891,7 @@ VisibleItems_FullmoonIslandForest_LunarWing:
     End
 
 VisibleItems_Route209LostTower3F_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1269,7 +1269,7 @@ VisibleItems_MtCoronetB1F_MaxElixir:
     End
 
 VisibleItems_MtCoronetB1F_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1335,7 +1335,7 @@ VisibleItems_GalacticHQ3F_TM21:
     End
 
 VisibleItems_GalacticHQ2F_Revive:
-    SetVar VAR_0x8008, ITEM_MAX_REVIVE
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1353,7 +1353,7 @@ VisibleItems_OreburghGateB1F_BigPearl:
     End
 
 VisibleItems_MtCoronet2F_MaxRevive:
-    SetVar VAR_0x8008, ITEM_MAX_REVIVE
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1557,7 +1557,7 @@ VisibleItems_Route225_DawnStone:
     End
 
 VisibleItems_Route225_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1665,7 +1665,7 @@ VisibleItems_StarkMountainRoom2_UltraBall:
     End
 
 VisibleItems_StarkMountainRoom2_MaxRevive:
-    SetVar VAR_0x8008, ITEM_MAX_REVIVE
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1995,7 +1995,7 @@ VisibleItems_SolaceonTown_RareCandy:
     End
 
 VisibleItems_TeamGalacticEternaBuilding4F_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2067,7 +2067,7 @@ VisibleItems_IronIslandB2FLeftRoom_Nugget:
     End
 
 VisibleItems_IronIslandB1FRightRoom_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2079,7 +2079,7 @@ VisibleItems_Route216_MaxPotion:
     End
 
 VisibleItems_Route216_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+    SetVar VAR_0x8008, ITEM_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

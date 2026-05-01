@@ -140,7 +140,7 @@ JubilifeTV1F_SetSecondPrize:
     GoTo JubilifeTV1F_GiveLotteryPrize
 
 JubilifeTV1F_SetFirstPrize:
-    SetVar VAR_0x8003, ITEM_MAX_REVIVE
+    SetVar VAR_0x8003, ITEM_MAX_POTION
     GoTo JubilifeTV1F_GiveLotteryPrize
 
 JubilifeTV1F_SetJackpotPrize:

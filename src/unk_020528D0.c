@@ -25,6 +25,7 @@
 #include "pokemon.h"
 #include "render_window.h"
 #include "save_player.h"
+#include "savedata.h"
 #include "screen_fade.h"
 #include "script_manager.h"
 #include "sound_playback.h"
@@ -203,7 +204,8 @@ BOOL FieldTask_BlackOutFromBattle(FieldTask *task)
     switch (*state) {
     case 0: {
         if ((fieldSystem != NULL) && (fieldSystem->saveData != NULL)) {
-            Party_SetGiratinaForm(SaveData_GetParty(fieldSystem->saveData), GIRATINA_FORM_ALTERED);
+            SaveData_Erase(fieldSystem->saveData);
+            OS_ResetSystem(0);
         }
 
         Location location;

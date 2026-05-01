@@ -10,6 +10,7 @@
 #include "hall_of_fame_entries.h"
 #include "mystery_gift.h"
 #include "pal_park_transfers.h"
+#include "locked_box.h"
 #include "pc_boxes.h"
 #include "savedata.h"
 

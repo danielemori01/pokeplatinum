@@ -17,7 +17,6 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
     { ITEM_HYPER_POTION, 0x4 },
     { ITEM_MAX_POTION, 0x5 },
     { ITEM_FULL_RESTORE, 0x6 },
-    { ITEM_REVIVE, 0x3 },
     { ITEM_ANTIDOTE, 0x1 },
     { ITEM_PARLYZ_HEAL, 0x1 },
     { ITEM_AWAKENING, 0x2 },
@@ -54,7 +53,7 @@ const u16 EternaHerbShopStock[] = {
     ITEM_HEAL_POWDER,
     ITEM_ENERGYPOWDER,
     ITEM_ENERGY_ROOT,
-    ITEM_REVIVAL_HERB,
+    ITEM_ENERGY_ROOT,
     SHOP_ITEM_END
 };
 
@@ -78,7 +77,6 @@ const u16 VeilstoneDeptStoreStock_1F_RIGHT[] = {
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
     ITEM_MAX_POTION,
-    ITEM_REVIVE,
     ITEM_ANTIDOTE,
     ITEM_PARLYZ_HEAL,
     ITEM_BURN_HEAL,

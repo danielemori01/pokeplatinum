@@ -40,7 +40,7 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 3. **In-game trade:** If the player has the species the NPC wants, they may initiate the trade. The given species is consumed, and the player receives a roll instead of the NPC's intended Pokémon. Net result: -1 mon, +1 rolled mon.
 4. **Forced gifts and event captures** (Eevee from Bebe, Riolu egg, Happiny egg, Porygon, Giratina capture, etc.): the event still completes for story purposes, but the gifted/captured species is replaced by a rolled species.
 
-## Permadeath
+## Permadeath--
 
 - When a Pokémon's HP reaches 0 in battle, instead of applying STATUS_FAINTED:
   - Mark the Pokémon as permanently dead.
@@ -49,10 +49,13 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
   - Dead Pokémon do not gain XP from subsequent battles.
 - v1: locked box is hidden from the PC UI (simpler).
 - Future: locked box is visible as a read-only memorial in the PC UI.
+- on a wipe/blackout, deleting the save data and restarting the game from the beginning--Done!
+- removing all revive items, only opponents can use them if theyhave them--Done!
+- all Done except the visible locked box
 
 ## Catching & Wild Encounters
 
-- Poké Balls (all variants) are removed from the game entirely. Not in shops, not as field items, not from NPCs.
+- Poké Balls (all variants) are removed from the game entirely. Not in shops, not as field items, not from NPCs.--Done!
 - Wild battles still occur normally (grass/cave/surf/fish encounters trigger battles for XP).
 - The "Catch" action in battle is unreachable because the bag is disabled in combat (see below).
 

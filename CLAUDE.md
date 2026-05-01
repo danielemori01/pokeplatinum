@@ -41,6 +41,7 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - Locked box is hidden from the PC UI in v1 (visible memorial is v4 scope — see DESIGN.md).
 - **Code areas (expected):** battle HP-decrement path, faint handling, status flags, PC box code, experience-distribution code.
 - **Risk:** cross-overlay state. Confirm overlay residency (`platinum.us/main.lsf`) before assuming a function is callable.
+- All Done and more see DESIGN.md!
 
 ### 2. Initial 7-Roll Draft
 
@@ -63,7 +64,7 @@ Replaces the starter Pokémon briefcase scene at game start.
 - Not in shop inventories. Not as field/hidden items. Not from NPC gifts. Not as Pickup-ability rewards.
 - Wild battles still occur for XP. Catch action becomes unreachable de facto (bag is not yet disabled in v1; the deterrent is just that there are no balls to use).
 - **Code areas (expected):** shop item tables, field item placements, NPC gift scripts, Pickup table.
-
+- all Done"""
 ## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
 
 These are designed but not yet active. See DESIGN.md for full specs:
