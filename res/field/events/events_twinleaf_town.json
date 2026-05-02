@@ -162,26 +162,5 @@
             "dest_warp_id": 0
         }
     ],
-    "coord_events": [
-        {
-            "script": 4,
-            "x": 108,
-            "z": 867,
-            "y": 0,
-            "width": 8,
-            "length": 1,
-            "var": "VAR_TWINLEAF_TOWN_GUITARIST_TRIGGER_STATE",
-            "value": 1
-        },
-        {
-            "script": 2,
-            "x": 105,
-            "z": 876,
-            "y": 0,
-            "width": 1,
-            "length": 1,
-            "var": "VAR_TWINLEAF_TOWN_RIVAL_TRIGGER_STATE",
-            "value": 0
-        }
-    ]
+    "coord_events": []
 }

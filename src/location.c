@@ -6,10 +6,10 @@
 #include "savedata.h"
 
 static const Location sPlayerStartLocation = {
-    .mapId = MAP_HEADER_TWINLEAF_TOWN_PLAYER_HOUSE_2F,
+    .mapId = MAP_HEADER_SANDGEM_TOWN_POKEMON_RESEARCH_LAB,
     .warpId = WARP_ID_NONE,
-    .x = 4,
-    .z = 6,
+    .x = 7,
+    .z = 15,
     .faceDirection = FACE_UP,
 };
 

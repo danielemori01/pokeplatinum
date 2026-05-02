@@ -43,20 +43,16 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - **Risk:** cross-overlay state. Confirm overlay residency (`platinum.us/main.lsf`) before assuming a function is callable.
 - All Done and more see DESIGN.md!
 
-### 2. Initial 7-Roll Draft
+### 2. Fast Forward / Intro Skip
 
-Replaces the starter Pokémon briefcase scene at game start.
+Bypasses the vanilla introductory sequence.
 
-- 7 sequential rolls, each a separate pool of 6 species.
-- 2 species per pool are randomly banned; player picks 1 of the remaining 4.
-- Each pick is given to the party via the project's standard "give Pokémon" code path (likely something equivalent to `GiveMon`).
-- Pool source: full National Dex, base-form or single-stage only, **no legendaries, mythicals, or shinies.**
-- Bans are per-roll only; banned species can reappear in future rolls. Repeats across rolls allowed.
-- **OPEN QUESTIONS for this subsystem (must resolve before implementation begins):**
-  - What level does a rolled Pokémon arrive at? (Suggest: level 5 for the initial draft, matching vanilla starter level.)
-  - Party size of 7 exceeds the vanilla cap of 6. Options: expand party storage, OR cap at 6 active + 1 reserve, OR design something else. **Decide before coding.**
-- **Code areas (expected):** starter event script, party-add primitive, possibly party storage struct.
-- **Risk:** lowest of the three. Stick to existing menu and give-Pokémon primitives wherever possible.
+- Skips Professor Rowan's introductory speech and naming/gender screens.
+- Player character is automatically named **LUCAS** and the rival is named **BARRY**.
+- Player spawns directly in Professor Rowan's Lab in Sandgem Town.
+- Starter selection, Pokedex, Running Shoes, Journal, and Parcel are given immediately.
+- All early narrative blockers and cutscenes in Twinleaf Town, Route 201, and Lake Verity are disabled/cleared.
+- **Done.**
 
 ### 3. Poké Ball Removal
 
@@ -70,6 +66,7 @@ Replaces the starter Pokémon briefcase scene at game start.
 These are designed but not yet active. See DESIGN.md for full specs:
 
 - Post-gym rolls
+- Initial 7-Roll Draft: Sequential rolls at game start, replacing starter briefcase. (Needs implementation)
 - In-game trade replacement
 - Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
 - Combat bag disable

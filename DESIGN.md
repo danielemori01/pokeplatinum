@@ -34,11 +34,21 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 
 ### When a roll happens
 
-1. **Initial draft (game start, replaces starter briefcase):** 7 sequential rolls, 7 different pools. Player builds their starting party of 7 from these.
+1. **Initial draft (Planned):**
+   Sequential rolls at game start, replacing the starter briefcase. Player builds their starting party from these rolls.
    *Note: party size of 7 exceeds the vanilla cap of 6. Implementation must either expand party storage or use a hybrid (6 active + 1 reserve). To be decided.*
-2. **Post-gym roll:** After each of the 8 gyms, player gets one roll. Player selects a target party slot **first** (empty or occupied — including dead/locked slots), then rolls. Roll cannot be rejected once started.
-3. **In-game trade:** If the player has the species the NPC wants, they may initiate the trade. The given species is consumed, and the player receives a roll instead of the NPC's intended Pokémon. Net result: -1 mon, +1 rolled mon.
-4. **Forced gifts and event captures** (Eevee from Bebe, Riolu egg, Happiny egg, Porygon, Giratina capture, etc.): the event still completes for story purposes, but the gifted/captured species is replaced by a rolled species.
+
+2. **Fast Forward / Intro Skip (Done):**
+   Bypasses the vanilla introductory sequence (Rowan intro, naming screens, Twinleaf events). Player spawns in Rowan's Lab and receives starter/Pokedex/Running Shoes immediately.
+
+3. **Post-gym roll (Planned):**
+   After each of the 8 gyms, player gets one roll. Player selects a target party slot **first** (empty or occupied — including dead/locked slots), then rolls. Roll cannot be rejected once started.
+
+4. **In-game trade (Planned):**
+   If the player has the species the NPC wants, they may initiate the trade. The given species is consumed, and the player receives a roll instead of the NPC's intended Pokémon. Net result: -1 mon, +1 rolled mon.
+
+5. **Forced gifts and event captures (Planned):**
+   (Eevee from Bebe, Riolu egg, Happiny egg, Porygon, Giratina capture, etc.): the event still completes for story purposes, but the gifted/captured species is replaced by a rolled species.
 
 ## Permadeath--
 
@@ -90,7 +100,7 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 
 ## Versioning Plan
 
-- **v1 (current):** Permadeath + Initial 7-roll Draft + Poké Ball removal.
-- **v2:** Add post-gym rolls + bag-in-combat disable + free Rare Candies + unsellable Rare Candies.
+- **v1 (current):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal.
+- **v2:** Add Initial 7-roll Draft + post-gym rolls + bag-in-combat disable + free Rare Candies + unsellable Rare Candies.
 - **v3:** Add HM Overhaul + forced-event replacement + in-game trade replacement.
 - **v4 (polish):** Visible locked box (memorial), stat-based ban algorithm, balance pass.

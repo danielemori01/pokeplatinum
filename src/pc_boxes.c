@@ -58,19 +58,16 @@ static void PCBoxes_InitInternal(PCBoxes *pcBoxes)
 
 BOOL PCBoxes_TryStoreBoxMon(PCBoxes *pcBoxes, BoxPokemon *boxMon)
 {
-    u32 boxID = pcBoxes->currentBoxID;
-    do {
+    int i;
+    for (i = 0; i < (MAX_PC_BOXES - 1); i++) {
+        u32 boxID = (pcBoxes->currentBoxID + i) % (MAX_PC_BOXES - 1);
         BoxPokemon_RestorePP(boxMon);
 
         if (PCBoxes_TryStoreBoxMonInBox(pcBoxes, boxID, boxMon)) {
             SaveData_SetFullSaveRequired();
             return TRUE;
         }
-
-        if (++boxID >= MAX_PC_BOXES) {
-            boxID = 0;
-        }
-    } while (boxID != pcBoxes->currentBoxID);
+    }
 
     return FALSE;
 }
@@ -138,21 +135,13 @@ u32 PCBoxes_GetCurrentBoxID(const PCBoxes *pcBoxes)
 
 u32 PCBoxes_FirstEmptyBox(const PCBoxes *pcBoxes)
 {
-    int boxID = pcBoxes->currentBoxID;
-
-    while (TRUE) {
+    int i;
+    for (i = 0; i < (MAX_PC_BOXES - 1); i++) {
+        u32 boxID = (pcBoxes->currentBoxID + i) % (MAX_PC_BOXES - 1);
         for (int monPosInBox = 0; monPosInBox < MAX_MONS_PER_BOX; monPosInBox++) {
             if (BoxPokemon_GetValue(&pcBoxes->boxMons[boxID][monPosInBox], MON_DATA_SPECIES_EXISTS, NULL) == 0) {
                 return boxID;
             }
-        }
-
-        if (++boxID >= MAX_PC_BOXES) {
-            boxID = 0;
-        }
-
-        if (boxID == pcBoxes->currentBoxID) {
-            break;
         }
     }
 
@@ -165,10 +154,12 @@ BOOL PCBoxes_TryGetNextAvailableSpace(const PCBoxes *pcBoxes, int *boxIndexDest,
         *boxIndexDest = pcBoxes->currentBoxID;
     }
 
-    int boxID = *boxIndexDest;
+    int i;
+    int startBox = *boxIndexDest;
     int monPosInBox = *monPosInBoxDest;
 
-    while (TRUE) {
+    for (i = 0; i < (MAX_PC_BOXES - 1); i++) {
+        u32 boxID = (startBox + i) % (MAX_PC_BOXES - 1);
         for (; monPosInBox < MAX_MONS_PER_BOX; monPosInBox++) {
             if (BoxPokemon_GetValue(&pcBoxes->boxMons[boxID][monPosInBox], MON_DATA_SPECIES_EXISTS, NULL) == FALSE) {
                 *boxIndexDest = boxID;
@@ -176,19 +167,10 @@ BOOL PCBoxes_TryGetNextAvailableSpace(const PCBoxes *pcBoxes, int *boxIndexDest,
                 return TRUE;
             }
         }
-
-        if (++boxID >= MAX_PC_BOXES) {
-            boxID = 0;
-        }
-
-        if (boxID == *boxIndexDest) {
-            break;
-        }
-
         monPosInBox = 0;
     }
 
-    return MAX_PC_BOXES;
+    return FALSE;
 }
 
 u32 PCBoxes_CountAllBoxMons(const PCBoxes *pcBoxes)

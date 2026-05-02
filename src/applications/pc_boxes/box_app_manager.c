@@ -2356,7 +2356,7 @@ static void CheckLastMonWithReleaseBlockingMove(SysTask *task, void *releaseMonP
     BoxPokemon *boxMon;
     int monIndex, i;
 
-    if (releaseMon->boxID < MAX_PC_BOXES) {
+    if (releaseMon->boxID < (MAX_PC_BOXES - 1)) {
         int v4 = releaseMon->monPosInBox + 15; // why + 15?
 
         if (v4 > MAX_MONS_PER_BOX) {
@@ -2934,7 +2934,7 @@ static BOOL BoxAppMan_TrySelectBoxFromPopup(BoxApplicationManager *boxAppMan)
             boxSelector->boxID--;
 
             if (boxSelector->boxID < 0) {
-                boxSelector->boxID = MAX_PC_BOXES - 1;
+                boxSelector->boxID = (MAX_PC_BOXES - 1) - 1;
             }
 
             BoxApp_SetBoxSelectionBoxID(&boxAppMan->boxApp, boxSelector->boxID);
@@ -2943,7 +2943,7 @@ static BOOL BoxAppMan_TrySelectBoxFromPopup(BoxApplicationManager *boxAppMan)
         }
 
         if (JOY_NEW(PAD_KEY_RIGHT | PAD_BUTTON_R)) {
-            if (++(boxSelector->boxID) >= MAX_PC_BOXES) {
+            if (++(boxSelector->boxID) >= (MAX_PC_BOXES - 1)) {
                 boxSelector->boxID = 0;
             }
 
@@ -3085,9 +3085,9 @@ static void BoxAppMan_TouchScreenBoxJump(BoxApplicationManager *boxAppMan, u32 *
                 int newOffset = BoxApp_GetTouchDialOffset(&boxAppMan->boxApp) + scrollDelta;
 
                 if (newOffset < 0) {
-                    newOffset += MAX_PC_BOXES;
-                } else if (newOffset >= MAX_PC_BOXES) {
-                    newOffset -= MAX_PC_BOXES;
+                    newOffset += (MAX_PC_BOXES - 1);
+                } else if (newOffset >= (MAX_PC_BOXES - 1)) {
+                    newOffset -= (MAX_PC_BOXES - 1);
                 }
 
                 boxAppMan->touchDialScrollAmount = scrollAmount;
@@ -4253,7 +4253,7 @@ static void BoxApp_LoadRightBoxCustomization(BoxApplication *boxApp)
 {
     BoxCustomization *customization = &boxApp->customization;
 
-    if (++(customization->boxID) >= MAX_PC_BOXES) {
+    if (++(customization->boxID) >= (MAX_PC_BOXES - 1)) {
         customization->boxID = 0;
     }
 
@@ -4267,7 +4267,7 @@ static void BoxApp_LoadLeftBoxCustomization(BoxApplication *boxApp)
     if (customization->boxID) {
         customization->boxID--;
     } else {
-        customization->boxID = MAX_PC_BOXES - 1;
+        customization->boxID = (MAX_PC_BOXES - 1) - 1;
     }
 
     PCBoxes_LoadCustomization(boxApp->pcBoxes, customization);

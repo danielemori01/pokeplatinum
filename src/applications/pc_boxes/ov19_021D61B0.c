@@ -1781,9 +1781,9 @@ static int BoxGraphics_GetBoxMoveDirection(u32 sourceBoxID, u32 destBoxID)
 
     if (destBoxID > sourceBoxID) {
         distanceRight = destBoxID - sourceBoxID;
-        distanceLeft = sourceBoxID + (MAX_PC_BOXES - destBoxID);
+        distanceLeft = sourceBoxID + ((MAX_PC_BOXES - 1) - destBoxID);
     } else {
-        distanceRight = destBoxID + (MAX_PC_BOXES - sourceBoxID);
+        distanceRight = destBoxID + ((MAX_PC_BOXES - 1) - sourceBoxID);
         distanceLeft = sourceBoxID - destBoxID;
     }
 

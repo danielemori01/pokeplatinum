@@ -128,23 +128,49 @@ _01AC:
 
 SandgemTownLab_OnFrameGetPokedex:
     LockAll
-    ApplyMovement LOCALID_COUNTERPART, SandgemTownLab_Movement_CounterpartWalkToProfRowan
     ApplyMovement LOCALID_PLAYER, SandgemTownLab_Movement_PlayerWalkToProfRowan
     WaitMovement
-    BufferPlayerName 0
     Message SandgemTownLab_Text_LetsHaveALookAtYourPokemon
     CloseMessage
-    SetPlayerState PLAYER_TRANSITION_HEALING
-    ChangePlayerState
-    ApplyMovement LOCALID_PLAYER, SandgemTownLab_Movement_PlayerGive
-    WaitMovement
-    SetVar VAR_0x8004, 0
-    GetPartyMonSpecies VAR_0x8004, VAR_RESULT
-    SetVar VAR_0x8008, VAR_RESULT
-    GoToIfEq VAR_0x8008, SPECIES_TURTWIG, SandgemTownLab_ThisPokemonSeemstoBeRatherHappy
-    GoToIfEq VAR_0x8008, SPECIES_CHIMCHAR, SandgemTownLab_ThisPokemonSeemstoBeRatherHappy
-    GoToIfEq VAR_0x8008, SPECIES_PIPLUP, SandgemTownLab_ThisPokemonSeemstoBeRatherHappy
-    GoTo SandgemTownLab_YouveMadeYourPokemonEvolveAlready
+    FadeScreenOut FADE_SCREEN_SPEED_MEDIUM
+    WaitFadeScreen
+    StartChooseStarterScene
+    SaveChosenStarter
+    ReturnToField
+    FadeScreenIn FADE_SCREEN_SPEED_MEDIUM
+    WaitFadeScreen
+    GetPlayerStarterSpecies VAR_0x8000
+    GivePokemon VAR_0x8000, 5, ITEM_NONE, VAR_RESULT
+    SetFlag 0x3C2 @ FLAG_SYS_POKEMON_GET
+    SetFlag FLAG_RIVAL_LEFT_HOME
+    GivePokedex
+    SetFlag FLAG_HAS_POKEDEX
+    Message SandgemTownLab_Text_PlayerObtainedThePokedex
+    PlayFanfare SEQ_FANFA4
+    WaitFanfare
+    CloseMessage
+    GiveRunningShoes
+    AddItem ITEM_JOURNAL, 1, VAR_RESULT
+    GiveJournal
+    AddItem ITEM_PARCEL, 1, VAR_RESULT
+    SetFlag FLAG_RECEIVED_PARCEL
+    SetVar VAR_SANDGEM_TOWN_LAB_STATE, 1
+    SetVar VAR_SANDGEM_TOWN_STATE, 2
+    SetVar VAR_ROUTE_202_STATE, 0
+    SetVar VAR_PLAYER_HOUSE_STATE, 3
+    SetVar VAR_RIVAL_HOUSE_STATE, 1
+    SetVar VAR_VISITED_LAKE_VERITY_WITH_RIVAL, 1
+    SetVar VAR_LAKE_VERITY_PROF_ROWAN_STATE, 1
+    SetFlag FLAG_HIDE_TWINLEAF_TOWN_RIVAL
+    SetFlag FLAG_HIDE_TWINLEAF_TOWN_RIVAL_HOUSE_2F_RIVAL
+    SetFlag FLAG_HIDE_ROUTE_201_RIVAL
+    SetFlag FLAG_HIDE_SANDGEM_TOWN_COUNTERPART
+    SetFlag FLAG_HIDE_LAKE_VERITY_LOW_WATER_RIVAL
+    SetFlag FLAG_HIDE_LAKE_VERITY_LOW_WATER_CYRUS
+    ClearFlag FLAG_HIDE_ROUTE_202_COUNTERPART
+    RemoveObject LOCALID_COUNTERPART
+    ReleaseAll
+    End
 
 SandgemTownLab_ThisPokemonSeemstoBeRatherHappy:
     Message SandgemTownLab_Text_ThisPokemonSeemstoBeRatherHappy

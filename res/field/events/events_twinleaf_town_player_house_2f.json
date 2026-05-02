@@ -66,46 +66,5 @@
             "dest_warp_id": 1
         }
     ],
-    "coord_events": [
-        {
-            "script": 7,
-            "x": 4,
-            "z": 5,
-            "y": 0,
-            "width": 1,
-            "length": 1,
-            "var": "VAR_PLAYER_HOUSE_RIVAL_TRIGGER_STATE",
-            "value": 0
-        },
-        {
-            "script": 8,
-            "x": 3,
-            "z": 6,
-            "y": 0,
-            "width": 1,
-            "length": 1,
-            "var": "VAR_PLAYER_HOUSE_RIVAL_TRIGGER_STATE",
-            "value": 0
-        },
-        {
-            "script": 9,
-            "x": 5,
-            "z": 6,
-            "y": 0,
-            "width": 1,
-            "length": 1,
-            "var": "VAR_PLAYER_HOUSE_RIVAL_TRIGGER_STATE",
-            "value": 0
-        },
-        {
-            "script": 10,
-            "x": 4,
-            "z": 7,
-            "y": 0,
-            "width": 1,
-            "length": 1,
-            "var": "VAR_PLAYER_HOUSE_RIVAL_TRIGGER_STATE",
-            "value": 0
-        }
-    ]
+    "coord_events": []
 }

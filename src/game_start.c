@@ -1,11 +1,13 @@
 #include "game_start.h"
 
+#include "constants/charcode.h"
 #include "constants/game_options.h"
 #include "constants/heap.h"
 
 #include "appearance.h"
 #include "berry_patches.h"
 #include "game_options.h"
+#include "generated/genders.h"
 #include "heap.h"
 #include "location.h"
 #include "main.h"
@@ -18,6 +20,7 @@
 #include "save_player.h"
 #include "savedata.h"
 #include "savedata_misc.h"
+#include "string_gf.h"
 #include "system_data.h"
 #include "system_flags.h"
 #include "trainer_info.h"
@@ -42,6 +45,7 @@ static void TryLoadingSave(int unused, SaveData *saveData);
 static void StartNewSave(int unused, SaveData *saveData);
 
 extern const ApplicationManagerTemplate gRowanIntroAppTemplate;
+FS_EXTERN_OVERLAY(game_start);
 
 const ApplicationManagerTemplate gGameStartRowanIntroAppTemplate = {
     .init = GameStartRowanIntro_Init,
@@ -80,8 +84,32 @@ static BOOL GameStartRowanIntro_Main(ApplicationManager *appMan, int *state)
 
 static int GameStartRowanIntro_Exit(ApplicationManager *appMan, int *state)
 {
+    static const charcode_t sPlayerName[] = {
+        CHAR_L, CHAR_U, CHAR_C, CHAR_A, CHAR_S, CHAR_EOS
+    };
+    static const charcode_t sRivalNameChars[] = {
+        CHAR_B, CHAR_A, CHAR_R, CHAR_R, CHAR_Y, CHAR_EOS
+    };
+
+    SaveData *saveData = ((ApplicationArgs *)ApplicationManager_Args(appMan))->saveData;
+    TrainerInfo *trainerInfo = SaveData_GetTrainerInfo(saveData);
+    MiscSaveBlock *miscSave = SaveData_MiscSaveBlock(saveData);
+
+    TrainerInfo_SetName(trainerInfo, sPlayerName);
+    TrainerInfo_SetGender(trainerInfo, GENDER_MALE);
+
+    {
+        String *rivalName = String_Init(TRAINER_NAME_LEN + 1, HEAP_ID_GAME_START);
+        int i;
+        for (i = 0; sRivalNameChars[i] != CHAR_EOS; i++) {
+            String_AppendChar(rivalName, sRivalNameChars[i]);
+        }
+        MiscSaveBlock_SetRivalName(miscSave, rivalName);
+        String_Free(rivalName);
+    }
+
     Heap_Destroy(HEAP_ID_GAME_START);
-    EnqueueApplication(FS_OVERLAY_ID_NONE, &gRowanIntroAppTemplate);
+    EnqueueApplication(FS_OVERLAY_ID(game_start), &gGameStartNewSaveAppTemplate);
     return TRUE;
 }
 

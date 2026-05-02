@@ -1502,8 +1502,8 @@ static void ov19_021DE350(UnkStruct_ov19_021DCF88 *param0)
 
     v2 = BoxApp_GetTouchDialOffset(param0->unk_04) + 3;
 
-    if (v2 >= MAX_PC_BOXES) {
-        v2 -= MAX_PC_BOXES;
+    if (v2 >= (MAX_PC_BOXES - 1)) {
+        v2 -= (MAX_PC_BOXES - 1);
     }
 
     for (v1 = 0; v1 < NELEMS(v0); v1++) {
@@ -1512,7 +1512,7 @@ static void ov19_021DE350(UnkStruct_ov19_021DCF88 *param0)
         Text_AddPrinterWithParamsAndColor(&param0->unk_88, FONT_SYSTEM, param0->unk_84, v0[v1].unk_00 + 4, v0[v1].unk_02 + 2, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
 
         if (--v2 < 0) {
-            v2 = MAX_PC_BOXES - 1;
+            v2 = (MAX_PC_BOXES - 1) - 1;
         }
     }
 

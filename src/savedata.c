@@ -117,8 +117,6 @@ const void *SaveData_SaveTableConst(const SaveData *saveData, int saveTableID)
 
 BOOL SaveData_Erase(SaveData *saveData)
 {
-    u8 *saveBuffer = Heap_AllocAtEnd(HEAP_ID_APPLICATION, SAVE_SECTOR_SIZE);
-
     SleepLock(SLEEP_TYPE_SAVE_DATA);
 
     SaveBlockFooter_Erase(saveData, SAVE_BLOCK_ID_NORMAL, !saveData->blockOffsets[SAVE_BLOCK_ID_NORMAL]);
@@ -126,14 +124,6 @@ BOOL SaveData_Erase(SaveData *saveData)
     SaveBlockFooter_Erase(saveData, SAVE_BLOCK_ID_NORMAL, saveData->blockOffsets[SAVE_BLOCK_ID_NORMAL]);
     SaveBlockFooter_Erase(saveData, SAVE_BLOCK_ID_BOXES, saveData->blockOffsets[SAVE_BLOCK_ID_BOXES]);
 
-    MI_CpuFillFast(saveBuffer, 0xffffffff, SAVE_SECTOR_SIZE);
-
-    for (int i = 0; i < SAVE_PAGE_MAX * SECTOR_ID_MAX; i++) {
-        SaveData_CardSave(SAVE_SECTOR_SIZE * (i + PRIMARY_SECTOR_START), saveBuffer, SAVE_SECTOR_SIZE);
-        SaveData_CardSave(SAVE_SECTOR_SIZE * (i + BACKUP_SECTOR_START), saveBuffer, SAVE_SECTOR_SIZE);
-    }
-
-    Heap_Free(saveBuffer);
     SaveData_Clear(saveData);
 
     saveData->dataExists = FALSE;

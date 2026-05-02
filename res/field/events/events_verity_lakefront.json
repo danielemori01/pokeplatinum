@@ -54,16 +54,5 @@
             "dest_warp_id": 2
         }
     ],
-    "coord_events": [
-        {
-            "script": 3,
-            "x": 80,
-            "z": 844,
-            "y": 0,
-            "width": 2,
-            "length": 1,
-            "var": "VAR_UNK_0x4082",
-            "value": 0
-        }
-    ]
+    "coord_events": []
 }

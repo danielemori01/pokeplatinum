@@ -384,7 +384,7 @@ static void ov19_021DBDF4(UnkStruct_ov19_021DBA9C *param0)
         }
     }
 
-    for (v4 = 0; v4 < MAX_PC_BOXES; v4++) {
+    for (v4 = 0; v4 < (MAX_PC_BOXES - 1); v4++) {
         param0->unk_94[v4] = PCBoxes_CountMonsInBox(BoxApp_GetPCBoxes(param0->unk_0C), v4);
     }
 }

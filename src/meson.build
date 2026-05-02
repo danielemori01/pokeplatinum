@@ -274,6 +274,7 @@ pokeplatinum_c = files(
     'pokemon.c',
     'trainer_data.c',
     'pc_boxes.c',
+    'locked_box.c',
     'pokemon_icon.c',
     'dexmode_checker.c',
     'height_weight_data.c',

@@ -49,6 +49,7 @@
 #include "unk_0203D1B8.h"
 #include "unk_020528D0.h"
 #include "vars_flags.h"
+#include "locked_box.h"
 
 typedef struct Encounter {
     int *resultMaskPtr;
@@ -212,6 +213,7 @@ static BOOL FieldTask_Encounter(FieldTask *task)
         break;
 
     case 5:
+        // LockedBox_TransferDeadMons(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
         FreeEncounter(encounter);
         return TRUE;
         break;
@@ -435,6 +437,7 @@ static BOOL FieldTask_WildEncounter(FieldTask *task)
     case 6:
         if (sub_02069690(fieldSystem->chain)) {
             MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
+            // LockedBox_TransferDeadMons(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
             FreeWildEncounter(encounter);
             return TRUE;
         }

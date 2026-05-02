@@ -18,6 +18,7 @@
 
 #include "applications/pokemon_summary_screen/main.h"
 #include "field/field_system.h"
+#include "locked_box.h"
 #include "savedata/save_table.h"
 
 #include "appearance.h"
