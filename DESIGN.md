@@ -98,6 +98,10 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 - **Forced events full list:** Audit every forced gift/capture (Eevee, eggs, Porygon, Giratina, Spiritomb, Rotom, etc.) and confirm replacement strategy for each.
 - **Underground:** Does the Sinnoh Underground need any changes? (Spheres, fossils, secret bases — likely irrelevant but verify.)
 
+## Known Bugs / Future Fixes
+
+- **Player House Cutscene:** Entering the player's house in Twinleaf Town after the skip triggers the vanilla "after rival battle" cutscene with Mom. Since the player enters from the front door (instead of coming from upstairs), the movement script causes the player to walk outside of the normal map boundaries. This needs a state check or script removal in the next phase.
+
 ## Versioning Plan
 
 - **v1 (current):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal.
