@@ -156,6 +156,7 @@ static void UpdateFieldSystemFromDTO(const FieldBattleDTO *dto, FieldSystem *fie
     }
 
     FieldBattleDTO_UpdateFieldSystem(dto, fieldSystem);
+    LockedBox_TransferDeadMons(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
 }
 
 static BOOL FieldTask_Encounter(FieldTask *task)
@@ -213,7 +214,6 @@ static BOOL FieldTask_Encounter(FieldTask *task)
         break;
 
     case 5:
-        // LockedBox_TransferDeadMons(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
         FreeEncounter(encounter);
         return TRUE;
         break;
@@ -437,7 +437,6 @@ static BOOL FieldTask_WildEncounter(FieldTask *task)
     case 6:
         if (sub_02069690(fieldSystem->chain)) {
             MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
-            // LockedBox_TransferDeadMons(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
             FreeWildEncounter(encounter);
             return TRUE;
         }

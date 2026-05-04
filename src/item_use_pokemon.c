@@ -609,7 +609,7 @@ void Party_HealAllMembers(Party *party)
     for (int i = 0; i < monCount; i++) {
         Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
 
-        if (Pokemon_GetValue(mon, MON_DATA_SPECIES_EXISTS, NULL) == FALSE || mon->box.isDead) {
+        if (Pokemon_GetValue(mon, MON_DATA_SPECIES_EXISTS, NULL) == FALSE || Pokemon_GetValue(mon, MON_DATA_IS_DEAD, NULL)) {
             continue;
         }
 

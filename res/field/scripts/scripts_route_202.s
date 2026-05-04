@@ -109,13 +109,6 @@ Route202_LucasDoYouKnowHowToCatchAPokemon:
     GoTo Route202_DoCatchingTutorial
 
 Route202_DoCatchingTutorial:
-    CloseMessage
-    ApplyMovement LOCALID_COUNTERPART, Route202_Movement_CounterpartWalkWestIntoTallGrass
-    ApplyMovement LOCALID_PLAYER, Route202_Movement_PlayerWalkWestIntoTallGrass
-    WaitMovement
-    StartCatchingTutorial
-    ApplyMovement LOCALID_COUNTERPART, Route202_Movement_CounterpartWalkOnSpotEastAfterCatchingTutorial
-    WaitMovement
     GetPlayerGender VAR_RESULT
     GoToIfEq VAR_RESULT, GENDER_MALE, Route202_DawnToGetYouStartedIllGiveYouFivePokeBalls
     GoToIfEq VAR_RESULT, GENDER_FEMALE, Route202_LucasHereIllGiveYouFivePokeballsToGetYouStarted

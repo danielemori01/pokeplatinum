@@ -796,6 +796,10 @@ static u32 BoxPokemon_GetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam 
         result = boxMon->checksum;
         break;
 
+    case MON_DATA_IS_DEAD:
+        result = boxMon->isDead;
+        break;
+
     case MON_DATA_SPECIES_EXISTS:
         result = (monDataBlockA->species != SPECIES_NONE);
         break;
@@ -1374,6 +1378,10 @@ static void BoxPokemon_SetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam
 
     case MON_DATA_CHECKSUM:
         boxMon->checksum = *u16Value;
+        break;
+
+    case MON_DATA_IS_DEAD:
+        boxMon->isDead = *u8Value;
         break;
 
     case MON_DATA_SPECIES:

@@ -1774,7 +1774,8 @@ static BOOL BtlCmd_TryFaintMon(BattleSystem *battleSys, BattleContext *battleCtx
 
         if (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_PLAYER) {
             Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
-            mon->box.isDead = 1;
+            u32 isDead = 1;
+            Pokemon_SetValue(mon, MON_DATA_IS_DEAD, &isDead);
         }
 
         BattleScript_UpdateFriendship(battleSys, battleCtx, battler);

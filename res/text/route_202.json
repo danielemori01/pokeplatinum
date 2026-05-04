@@ -26,29 +26,16 @@
       "id": "Route202_Text_DawnIHaventShownYouHowToCatchAPokemon",
       "en_US": [
         "Dawn: Oh, that’s right!\r",
-        "{STRVAR_1 3, 1, 0}, I haven’t shown you\n",
-        "how to catch a Pokémon.\r",
-        "I’ll demonstrate how to catch \n",
-        "one, so just watch me, OK?\r"
+        "{STRVAR_1 3, 1, 0}, I have some items to\n",
+        "help you get started.\r"
       ]
     },
     {
       "id": "Route202_Text_DawnToGetYouStartedIllGiveYouFivePokeBalls",
       "en_US": [
-        "Dawn: Giggle...\n",
-        "See? Isn’t it neat?\r",
-        "Actually, it’s better to lower your\n",
-        "target’s HP more than I did.\r",
-        "It’s important to get the Pokémon’s\n",
-        "HP down as low as possible.\r",
-        "This is because a healthy Pokémon\n",
-        "is very difficult to catch.\r",
-        "Oh, Pokémon also get easier to catch\n",
-        "if you make them sleep or something\f",
-        "by using a Pokémon’s move.\r",
-        "OK, {STRVAR_1 3, 0, 0}, to get you\n",
-        "started, I’ll give you five\f",
-        "Poké Balls!\r"
+        "Dawn: Here, {STRVAR_1 3, 0, 0}, I’ll give\n",
+        "you five Potions to get you\f",
+        "started!\r"
       ]
     },
     {
@@ -87,27 +74,17 @@
     {
       "id": "Route202_Text_LucasDoYouKnowHowToCatchAPokemon",
       "en_US": [
-        "Lucas: {STRVAR_1 3, 1, 0}, do you know\n",
-        "how to catch a Pokémon?\r",
-        "I’ll demonstrate how to catch\n",
-        "one, so just watch, OK?\r"
+        "Lucas: {STRVAR_1 3, 1, 0}, here are some\n",
+        "items to help you get started on\f",
+        "your journey!\r"
       ]
     },
     {
       "id": "Route202_Text_LucasHereIllGiveYouFivePokeballsToGetYouStarted",
       "en_US": [
-        "Lucas: And that’s how it’s done.\r",
-        "Actually, I should have lowered the\n",
-        "target’s HP some more.\r",
-        "Yup, the important thing is to lower\n",
-        "the Pokémon’s HP as much as possible.\r",
-        "See, a healthy Pokémon isn’t easy to\n",
-        "catch.\r",
-        "Oh, yeah. They also get easier to\n",
-        "catch if you make one of your\f",
-        "Pokémon put them to sleep or such.\r",
-        "Here, {STRVAR_1 3, 0, 0}, I’ll give you\n",
-        "five Poké Balls to get you started.\r"
+        "Lucas: Here, {STRVAR_1 3, 0, 0}, I’ll give\n",
+        "you five Potions to get you\f",
+        "started.\r"
       ]
     },
     {

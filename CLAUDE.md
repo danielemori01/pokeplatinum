@@ -1,3 +1,8 @@
+## Changelog
+After every code change, append a summary of what was changed to `hackcontext.md` using this format:
+
+
+
 # Pokemon Platinum Decomp Hack — v1 Working Brief
 
 > Long-term project vision lives in `DESIGN.md`. This file is **only v1 scope.**
@@ -41,7 +46,8 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - Locked box is hidden from the PC UI in v1 (visible memorial is v4 scope — see DESIGN.md).
 - **Code areas (expected):** battle HP-decrement path, faint handling, status flags, PC box code, experience-distribution code.
 - **Risk:** cross-overlay state. Confirm overlay residency (`platinum.us/main.lsf`) before assuming a function is callable.
-- All Done and more see DESIGN.md!
+- **Not implemented.**
+
 
 ### 2. Fast Forward / Intro Skip
 
