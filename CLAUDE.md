@@ -35,44 +35,40 @@ This is `pret/pokeplatinum`, a byte-matching decompilation of Pokémon Platinum 
 
 After ANY edit, run `make`. Report success or paste the actual error. Do not claim a build worked without verifying. After meaningful changes, also run `sha1sum`.
 
-## v1 Scope (only these three subsystems)
+## v1 Scope (active milestones)
 
-### 1. Permadeath Engine
+### 1. Permadeath Engine (Done)
 
-- When a Pokémon's HP reaches 0 in battle, do not apply STATUS_FAINTED.
-- Instead, mark the Pokémon as permanently dead and move its struct to a hidden "locked" PC box.
-- Dead Pokémon cannot be revived, withdrawn, or used in any way.
-- Dead Pokémon do not gain XP from subsequent battles.
-- Locked box is hidden from the PC UI in v1 (visible memorial is v4 scope — see DESIGN.md).
-- **Code areas (expected):** battle HP-decrement path, faint handling, status flags, PC box code, experience-distribution code.
-- **Risk:** cross-overlay state. Confirm overlay residency (`platinum.us/main.lsf`) before assuming a function is callable.
-- **Not implemented.**
+- When a Pokémon's HP reaches 0 in battle, it is marked as permanently dead.
+- Dead Pokémon are moved to a hidden "locked" PC box (Box 18) after the battle ends.
+- `Party_HealAllMembers` (and similar effects) skip dead Pokémon.
+- **Implemented in:** `src/pokemon.c`, `src/battle/battle_script.c`, `src/encounter.c`, `src/item_use_pokemon.c`.
 
-
-### 2. Fast Forward / Intro Skip
-
-Bypasses the vanilla introductory sequence.
+### 2. Fast Forward / Intro Skip (Done)
 
 - Skips Professor Rowan's introductory speech and naming/gender screens.
-- Player character is automatically named **LUCAS** and the rival is named **BARRY**.
-- Player spawns directly in Professor Rowan's Lab in Sandgem Town.
-- Starter selection, Pokedex, Running Shoes, Journal, and Parcel are given immediately.
-- All early narrative blockers and cutscenes in Twinleaf Town, Route 201, and Lake Verity are disabled/cleared.
-- **Done.**
+- Player spawns directly in Professor Rowan's Lab.
+- Starter selection, Pokedex, Running Shoes, and basic inventory given.
+- Route 202 catching tutorial skipped; NPC gives Potions instead of balls.
+- **Implemented in:** `res/field/scripts/`, `res/text/route_202.json`.
 
-### 3. Poké Ball Removal
+### 3. Poké Ball Removal (Done)
 
-- Remove all Poké Ball variants (Poké Ball, Great Ball, Ultra Ball, Master Ball, Premier Ball, Heal Ball, Net Ball, Dive Ball, Nest Ball, Repeat Ball, Timer Ball, Luxury Ball, Dusk Ball, Quick Ball, Cherish Ball, Park Ball, etc.) from the game.
-- Not in shop inventories. Not as field/hidden items. Not from NPC gifts. Not as Pickup-ability rewards.
-- Wild battles still occur for XP. Catch action becomes unreachable de facto (bag is not yet disabled in v1; the deterrent is just that there are no balls to use).
-- **Code areas (expected):** shop item tables, field item placements, NPC gift scripts, Pickup table.
-- all Done"""
+- Removed all Poké Ball variants from shops and scripts.
+- Catch action becomes unreachable.
+- **Implemented in:** Shop inventories, field scripts.
+
+### 4. 7-mon Initial Draft (In Development)
+
+- Replace the Rowan Lab starter script with a "Draft" interface.
+- Ensure the 7 drafted Pokémon are added to the party/PC correctly at start.
+- **Status:** Planning phase.
+
 ## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
 
 These are designed but not yet active. See DESIGN.md for full specs:
 
 - Post-gym rolls
-- Initial 7-Roll Draft: Sequential rolls at game start, replacing starter briefcase. (Needs implementation)
 - In-game trade replacement
 - Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
 - Combat bag disable
@@ -81,19 +77,15 @@ These are designed but not yet active. See DESIGN.md for full specs:
 - Stat-based ban algorithm
 - Visible locked box memorial UI
 
-If the user asks Claude to implement any of the above, point them at DESIGN.md and ask whether they want to graduate it to v1 (which expands current scope and timeline). Do not silently start working on out-of-scope features.
-
 ## Rules for Claude
 
 - Never edit a file without reading it first.
-- For any change to a `.s` file or anything that compiles to a specific instruction sequence, build and report. Don't claim it works without verifying.
-- If a proposed change would touch >3 files, outline the plan and wait for confirmation before editing.
-- When you don't know a struct field, function signature, or constant name, **grep the codebase**. Don't guess. The user has been burned by hallucinated identifiers in the past.
-- pokeplatinum uses MWCC (CodeWarrior), not GCC. Compiler-specific behavior follows MWCC rules.
+- For any change to a `.s` file or anything that compiles to a specific instruction sequence, build and report.
+- If a proposed change would touch >3 files, outline the plan and wait for confirmation.
+- When you don't know a struct field, function signature, or constant name, **grep the codebase**.
 - Cross-overlay calls require checking the overlay map (`platinum.us/main.lsf`).
-- For each open question listed in the v1 subsystems above, the user must give an explicit answer before that part of the implementation begins. Don't pick an answer for them.
 
 ## Communication
 
 - Direct technical answers. No marketing fluff. No over-apologizing.
-- The user is learning Linux, git, C, and ARM while doing this. Brief explanations for non-pokeplatinum-specific commands are welcome on first use; don't repeat them every time.
+- The user is learning Linux, git, C, and ARM while doing this. Brief explanations for non-pokeplatinum-specific commands are welcome on first use.

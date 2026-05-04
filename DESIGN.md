@@ -17,93 +17,75 @@ A challenge ROM hack of Pokémon Platinum (US, rev 1) where:
 
 - Source: full National Dex (493 species).
 - Rules: base-form only OR single-stage species. No fully-evolved forms in the pool.
-- Excluded: legendaries, mythicals, shinies (shiny encounters disabled entirely for v1; revisit later).
-- Pool size: roughly 90–120 species after exclusions (to be confirmed at implementation).
-- Once acquired, normal evolution is allowed via standard gameplay (level, stone, trade, etc.).
+- Excluded: legendaries, mythicals, shinies.
+- Once acquired, normal evolution is allowed via standard gameplay.
 
 ## Roll Mechanic (universal primitive)
 
 A "roll" presents the player with **one pool of 6 species** drawn from the Pokémon Pool.
 
-- 2 species are banned (random selection in v1; stat-based ban in a future version).
+- 2 species are banned.
 - The player picks 1 of the remaining 4.
-- The chosen species is given to the player at an appropriate level (TBD: scale to current badge count? fixed level? — design decision needed before implementation).
-- Bans are per-roll only; banned species can reappear in future rolls.
-- Repeats across rolls are allowed.
-- If a Pokemon is already in the active team it can't appear in a roll
+- If a Pokemon is already in the active team it can't appear in a roll.
 
 ### When a roll happens
 
 1. **Initial draft (Planned):**
    Sequential rolls at game start, replacing the starter briefcase. Player builds their starting party from these rolls.
-   *Note: party size of 7 exceeds the vanilla cap of 6. Implementation must either expand party storage or use a hybrid (6 active + 1 reserve). To be decided.*
 
 2. **Fast Forward / Intro Skip (Done):**
-   Bypasses the vanilla introductory sequence (Rowan intro, naming screens, Twinleaf events). Player spawns in Rowan's Lab and receives starter/Pokedex/Running Shoes immediately.
+   Bypasses introductory sequence. Player spawns in Rowan's Lab. Starter selection and basic items given immediately.
 
 3. **Post-gym roll (Planned):**
-   After each of the 8 gyms, player gets one roll. Player selects a target party slot **first** (empty or occupied — including dead/locked slots), then rolls. Roll cannot be rejected once started.
+   After each of the 8 gyms, player gets one roll.
 
 4. **In-game trade (Planned):**
-   If the player has the species the NPC wants, they may initiate the trade. The given species is consumed, and the player receives a roll instead of the NPC's intended Pokémon. Net result: -1 mon, +1 rolled mon.
+   NPC trades are replaced by rolls.
 
 5. **Forced gifts and event captures (Planned):**
-   (Eevee from Bebe, Riolu egg, Happiny egg, Porygon, Giratina capture, etc.): the event still completes for story purposes, but the gifted/captured species is replaced by a rolled species.
+   Replaced by rolls.
 
-## Permadeath (Planned - Not Yet Implemented)
+## Permadeath (Done)
 
-- When a Pokémon's HP reaches 0 in battle, instead of applying STATUS_FAINTED:
-  - Mark the Pokémon as permanently dead.
-  - Move its full struct to a "locked" PC box.
-  - The Pokémon cannot be revived, withdrawn, or used in any way.
-  - Dead Pokémon do not gain XP from subsequent battles.
-- v1: locked box is hidden from the PC UI (simpler).
-- Future: locked box is visible as a read-only memorial in the PC UI.
-- on a wipe/blackout, deleting the save data and restarting the game from the beginning.
-- removing all revive items, only opponents can use them if they have them.
+- When a Pokémon's HP reaches 0 in battle, it is marked as permanently dead.
+- Dead Pokémon are moved to a hidden "locked" PC box (Box 18) after the battle ends.
+- `Party_HealAllMembers` (and similar effects) skip dead Pokémon.
+- Revive items are either removed or made non-functional for the player.
+- **Implemented in:** `src/pokemon.c`, `src/battle/battle_script.c`, `src/encounter.c`, `src/item_use_pokemon.c`.
 
-## Catching & Wild Encounters
+## Catching & Wild Encounters (Done)
 
-- Poké Balls (all variants) are removed from the game entirely. Not in shops, not as field items, not from NPCs.--Done!
-- Wild battles still occur normally (grass/cave/surf/fish encounters trigger battles for XP).
-- The "Catch" action in battle is unreachable because the bag is disabled in combat (see below).
+- Poké Balls (all variants) are removed from the game entirely. Not in shops, not as field items, not from NPCs.
+- Wild battles still occur normally for XP.
 
-## Combat Bag Restriction
+## Combat Bag Restriction (Planned)
 
 - The player's bag menu is disabled inside battles.
-- Held items continue to function normally (Berries auto-trigger, Choice items, etc.).
-- AI trainers retain full bag access (gym leaders using Full Restores etc. — vanilla behavior preserved).
+- Held items continue to function normally.
 
-## Economy
+## Economy (Planned)
 
-- Every Poké Mart sells Rare Candies for 0 ¥ (free).
-- Rare Candies cannot be sold (greyed out / unsellable in shop sell menu).
-- Other items unchanged. Player still earns money from trainer battles.
+- Every Poké Mart sells Rare Candies for 0 ¥.
+- Rare Candies are unsellable.
 
-## HM Overhaul
+## HM Overhaul (Planned)
 
-- HMs are replaced with Key Items (e.g., "Machete" replaces Cut, similar for Surf, Strength, Rock Smash, Waterfall, Rock Climb, Defog).
-- Field obstacles check for the relevant Key Item instead of an HM move on a party Pokémon.
-- HM moves themselves: TBD (could be removed entirely, repurposed, or left as regular damaging moves with their attack stats).
+- HMs are replaced with Key Items (e.g., "Machete" for Cut).
+- Field obstacles check for Key Items instead of moves.
 
 ## Open Questions / Decide Before Implementing
 
-- **Roll level:** What level does a rolled Pokémon arrive at? Scaled to badge count? Fixed list per roll-type? Match player's lowest party level?
-- **Party size > 6:** Expand party slots, or cap initial draft at 6 with one in reserve, or some other compromise?
-- **HM moves themselves:** What happens to Cut/Surf/etc. as moves once they're no longer needed for traversal?
-- **Pool exact size:** Once base-form/single-stage filtering is applied to the National Dex, get an exact count and confirm it's enough for 7 initial rolls + 8 post-gym rolls without forced repeats becoming awkward.
-- **Stat-based ban algorithm (post-v1):** Whose stats? Base stats sum? Specific stat thresholds? Banning highest BST = harder run; banning lowest = easier run.
-- **In-game trades full list:** Audit every in-game trade in Platinum and confirm the "consume mon, receive roll" rule applies cleanly to all of them.
-- **Forced events full list:** Audit every forced gift/capture (Eevee, eggs, Porygon, Giratina, Spiritomb, Rotom, etc.) and confirm replacement strategy for each.
-- **Underground:** Does the Sinnoh Underground need any changes? (Spheres, fossils, secret bases — likely irrelevant but verify.)
+- **Roll level:** What level does a rolled Pokémon arrive at?
+- **Party size > 6:** How to handle the initial 7-mon draft given the 6-mon party limit?
+- **HM moves themselves:** Repurpose or remove?
 
 ## Known Bugs / Future Fixes
 
-- **Player House Cutscene:** Entering the player's house in Twinleaf Town after the skip triggers the vanilla "after rival battle" cutscene with Mom. Since the player enters from the front door (instead of coming from upstairs), the movement script causes the player to walk outside of the normal map boundaries. This needs a state check or script removal in the next phase.
+- **Player House Cutscene:** Entering the house in Twinleaf Town triggers an out-of-bounds movement script. Needs a state check fix.
 
 ## Versioning Plan
 
-- **v1 (current):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal.
-- **v2:** Add Initial 7-roll Draft + post-gym rolls + bag-in-combat disable + free Rare Candies + unsellable Rare Candies.
-- **v3:** Add HM Overhaul + forced-event replacement + in-game trade replacement.
-- **v4 (polish):** Visible locked box (memorial), stat-based ban algorithm, balance pass.
+- **v1 (Done):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal.
+- **v2 (Next):** Initial 7-roll Draft + post-gym rolls + Combat Bag Disable + free Rare Candies.
+- **v3:** HM Overhaul + event/gift replacement.
+- **v4:** Visible Memorial UI, stat-based ban algorithm, balance pass.
