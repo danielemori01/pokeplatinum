@@ -80,6 +80,7 @@ static void SetLinkBattleResult(int resultMask, FieldSystem *fieldSystem);
 static int sub_020516C8(const BattleRegulation *regulation, int battleType);
 static void UpdateGameRecords(FieldSystem *fieldSystem, FieldBattleDTO *dto);
 static void UpdateJournal(FieldSystem *fieldSystem, FieldBattleDTO *dto);
+static void TransferDeadMonsToLockedBox(Party *party, SaveData *saveData);
 
 static BOOL FieldTask_RunBattle(FieldTask *task);
 static BOOL FieldTask_Encounter(FieldTask *task);
@@ -156,7 +157,7 @@ static void UpdateFieldSystemFromDTO(const FieldBattleDTO *dto, FieldSystem *fie
     }
 
     FieldBattleDTO_UpdateFieldSystem(dto, fieldSystem);
-    LockedBox_TransferDeadMons(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
+    TransferDeadMonsToLockedBox(SaveData_GetParty(fieldSystem->saveData), fieldSystem->saveData);
 }
 
 static BOOL FieldTask_Encounter(FieldTask *task)
@@ -992,4 +993,25 @@ void Encounter_NewVsGiratinaOrigin(FieldTask *task, u16 species, u8 level, int *
 
     GameRecords_IncrementRecordValue(SaveData_GetGameRecords(fieldSystem->saveData), RECORD_WILD_BATTLES_FOUGHT);
     StartEncounter(task, dto, EncEffects_CutInEffect(dto), EncEffects_BGM(dto), resultMaskPtr);
+}
+
+static void TransferDeadMonsToLockedBox(Party *party, SaveData *saveData)
+{
+    if (party == NULL || saveData == NULL) {
+        return;
+    }
+
+    int partyCount = Party_GetCurrentCount(party);
+    PCBoxes *pcBoxes = SaveData_GetPCBoxes(saveData);
+
+    for (int i = partyCount - 1; i >= 0; i--) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+        if (mon != NULL && Pokemon_GetValue(mon, MON_DATA_IS_DEAD, NULL)) {
+            // Transfer to Locked Box (Box 18, index 17)
+            if (PCBoxes_TryStoreBoxMonInBox(pcBoxes, LOCKED_BOX_INDEX, &mon->box)) {
+                // Successfully moved
+            }
+            Party_RemovePokemonBySlotIndex(party, i);
+        }
+    }
 }
