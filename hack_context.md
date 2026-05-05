@@ -68,3 +68,7 @@ None.
     - `LIST_MENU_NO_SELECTION_YET` (0xEEEE) is a user-managed placeholder — `ListMenu_ProcessInput` never returns it. The correct "nothing chosen" value is `MENU_NOTHING_CHOSEN` (-1). The bad check caused every frame to fall through to `currentPool[-1]` (garbage species) and call `DraftManager_AddPokemon` each frame, corrupting party data and crashing the battle.
     - Fixed: replaced constant check with `(s32)input < 0` which correctly catches both `MENU_NOTHING_CHOSEN` (-1) and `MENU_CANCEL` (-2).
     - Added bounds guard `index >= DRAFT_POOL_SIZE` for safety.
+- **Draft message ID fix (`src/roll_mechanic.c`):**
+    - ID 871 is "Pokémon's data was added to the Pokédex" (explains the `'s …` prefix the user saw), not a caught message.
+    - ID 873 is "A sandstorm is raging." (battle weather string), not a sent-to-PC message.
+    - Correct IDs: 867 = "Gotcha! {STRVAR_1 1,0,0} was caught!" (party), 869 = "{STRVAR_1 1,0,0} was sent to someone's PC." (box). Both use slot 1, matching `StringTemplate_SetSpeciesNameWithArticleByID(..., 1, species)`.

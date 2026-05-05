@@ -274,11 +274,11 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
         MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_BATTLE_STRINGS, HEAP_ID_FIELD1);
         
         if (dm->round < 6) {
-            // ID 871: "{STRVAR_1 1, 0, 0} was caught!"
-            MessageLoader_GetString(loader, 871, msg);
+            // ID 867: "Gotcha! {STRVAR_1 1, 0, 0} was caught!"
+            MessageLoader_GetString(loader, 867, msg);
         } else {
-            // ID 873: "{STRVAR_1 1, 0, 0} was sent to someone's PC."
-            MessageLoader_GetString(loader, 873, msg);
+            // ID 869: "{STRVAR_1 1, 0, 0} was sent to someone's PC."
+            MessageLoader_GetString(loader, 869, msg);
         }
         
         String *formatted = String_Init(128, HEAP_ID_FIELD1);
