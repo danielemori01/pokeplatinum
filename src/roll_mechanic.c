@@ -219,6 +219,7 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
     SaveData *saveData = dm->ctx->fieldSystem->saveData;
     Party *party = SaveData_GetParty(saveData);
     PCBoxes *pcBoxes = SaveData_GetPCBoxes(saveData);
+    Pokedex *pokedex = SaveData_GetPokedex(saveData);
     
     if (dm->round == 0) {
         VarsFlags *varsFlags = SaveData_GetVarsFlags(saveData);
@@ -238,6 +239,7 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
         PCBoxes_TryStoreBoxMon(pcBoxes, (BoxPokemon *)mon);
     }
     
+    Pokedex_Capture(pokedex, mon);
     Heap_Free(mon);
 }
 

@@ -17,6 +17,9 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
     - Added extra starters (Rattata, Pidgey, Caterpie) in `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s`.
     - Skipped Route 202 catching tutorial in `res/field/scripts/scripts_route_202.s`.
     - Updated Route 202 NPC text in `res/text/route_202.json` to give Potions instead of Poké Balls.
+- **Draft Pokémon ownership and Pokédex fix (`src/roll_mechanic.c`):**
+    - Added `Pokedex_Capture` calls to `DraftManager_AddPokemon` to ensure drafted Pokémon are correctly added to the Pokédex (seen and caught).
+    - Verified that `Pokemon_InitWith` and `Pokemon_SetCatchData` are correctly using player-specific `TrainerInfo` and `metLocation` data to correctly establish the drafted Pokémon as player-owned.
 - **Fixes:**
     - Resolved `SAVE_TABLE_ENTRY_MAX` mismatch crash in `include/constants/savedata/save_table.h`.
 
@@ -76,6 +79,9 @@ None.
     - Fixed graphical glitches (inverted colors) by switching to palette 13 (standard text palette) for window content and using `Window_FillTilemap` with color 15 (white). This ensures a white background with black text.
     - Fixed missing Pokémon names in messages by setting both index 0 and 1 in the local `StringTemplate`, ensuring compatibility with the battle string variables.
     - Optimized message box visibility: the box now only appears when a message is being shown and is erased/transparent during the Pokémon selection phase, preventing an empty box from cluttering the screen.
+- **Draft Pokémon ownership and Pokédex fix (`src/roll_mechanic.c`):**
+    - Added `Pokedex_Capture` calls to `DraftManager_AddPokemon` to ensure drafted Pokémon are correctly added to the Pokédex (seen and caught).
+    - Verified that `Pokemon_InitWith` and `Pokemon_SetCatchData` are correctly using player-specific `TrainerInfo` and `metLocation` data to correctly establish the drafted Pokémon as player-owned.
 - **Fixes:**
     - Resolved Twinleaf Town out-of-bounds movement crash by changing `VAR_PLAYER_HOUSE_STATE` from 3 to 7 in `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s`. This skips the running shoes cutscene which assumes the player is coming down the stairs, rather than entering from the front door.
 
