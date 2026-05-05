@@ -85,7 +85,8 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 
 ## Versioning Plan
 
-- **v1 (Done):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal.
-- **v2 (Next):** Initial 7-roll Draft + post-gym rolls + Combat Bag Disable + free Rare Candies.
+- **v1 (Done):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal + 7-mon Initial Draft.
+- **v2 (Next):** Post-gym rolls + Combat Bag Disable + free Rare Candies.
 - **v3:** HM Overhaul + event/gift replacement.
 - **v4:** Visible Memorial UI, stat-based ban algorithm, balance pass.
+an algorithm, balance pass.

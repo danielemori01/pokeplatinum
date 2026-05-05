@@ -4989,7 +4989,11 @@
     .macro BufferFloorNumber templateArg, floor
     .short SCRCMD_BUFFERFLOORNUMBER
     .byte \templateArg
-    .byte \floor
+    .short \floor
+    .endm
+
+    .macro ExecuteStarterDraft
+    .short SCRCMD_EXECUTESTARTERDRAFT
     .endm
 
 

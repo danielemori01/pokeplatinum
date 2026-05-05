@@ -134,16 +134,9 @@ SandgemTownLab_OnFrameGetPokedex:
     CloseMessage
     FadeScreenOut FADE_SCREEN_SPEED_MEDIUM
     WaitFadeScreen
-    StartChooseStarterScene
-    SaveChosenStarter
-    ReturnToField
+    ExecuteStarterDraft
     FadeScreenIn FADE_SCREEN_SPEED_MEDIUM
     WaitFadeScreen
-    GetPlayerStarterSpecies VAR_0x8000
-    GivePokemon VAR_0x8000, 5, ITEM_NONE, VAR_RESULT
-    GivePokemon SPECIES_RATTATA, 1, ITEM_NONE, VAR_RESULT
-    GivePokemon SPECIES_PIDGEY, 1, ITEM_NONE, VAR_RESULT
-    GivePokemon SPECIES_CATERPIE, 1, ITEM_NONE, VAR_RESULT
     SetFlag 0x3C2 @ FLAG_SYS_POKEMON_GET
     SetFlag FLAG_RIVAL_LEFT_HOME
     GivePokedex

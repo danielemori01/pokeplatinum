@@ -20,6 +20,7 @@
 #include "pc_boxes.h"
 #include "pokemon.h"
 #include "ribbon.h"
+#include "roll_mechanic.h"
 #include "save_player.h"
 #include "tv_segment.h"
 #include "unk_02017038.h"
@@ -823,5 +824,16 @@ BOOL ScrCmd_CheckPartyHasHeldItem(ScriptContext *ctx)
         }
     }
 
+    return FALSE;
+}
+
+BOOL ScrCmd_ExecuteStarterDraft(ScriptContext *ctx)
+{
+    if (ctx == NULL || ctx->fieldSystem == NULL || ctx->fieldSystem->location == NULL) {
+        return FALSE;
+    }
+
+    int metLocation = MapHeader_GetMapLabelTextID(ctx->fieldSystem->location->mapId);
+    StarterDraft_Execute(ctx->fieldSystem->saveData, metLocation);
     return FALSE;
 }

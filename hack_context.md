@@ -40,6 +40,18 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 | `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s` | Added `GivePokemon` for SPECIES_RATTATA, PIDGEY, and CATERPIE (Level 1). |
 | `res/field/scripts/scripts_route_202.s` | Removed `StartCatchingTutorial` and movement scripts. |
 | `res/text/route_202.json` | Replaced mentions of catching tutorial with Potion gifts. |
+| `include/scrcmd_party.h` | Added `ScrCmd_ExecuteStarterDraft` prototype. |
+| `src/scrcmd_party.c` | Implemented `ScrCmd_ExecuteStarterDraft`. |
+| `include/data/scripts/scrcmd.h` | Added `SCRCMD_EXECUTESTARTERDRAFT` to the command table. |
+| `asm/macros/scrcmd.inc` | Added `ExecuteStarterDraft` macro. |
+| `src/roll_mechanic.c` | Updated `StarterDraft_Execute` to set the player starter variable. |
+| `src/meson.build` | Added `roll_mechanic.c` to the build. |
+| `src/scrcmd_party.c` | Temporarily disabled `ScrCmd_ExecuteStarterDraft` logic for crash debugging. |
+| `src/scrcmd_party.c` | Replaced `return TRUE` with `return FALSE` in `ScrCmd_ExecuteStarterDraft` to avoid blocking script execution. |
+| `src/scrcmd_party.c` | Added NULL pointer safety checks and re-enabled `ScrCmd_ExecuteStarterDraft`. |
+| `src/roll_mechanic.c` | Refactored `StarterDraft_Execute` to manually initialize and add Pokémon to the party, bypassing `SaveData_UpdateCatchRecords` to prevent a crash when the Pokédex is not yet initialized. |
+| `src/roll_mechanic.c` | Increased draft to 7 Pokémon; the 7th Pokémon is sent to the PC (Box 1). |
+| `src/roll_mechanic.c` | Fixed Pokémon obedience by properly setting the player's OTID and met terrain (`TERRAIN_MAX`) for drafted Pokémon. |
 
 ## Known Issues
 None.

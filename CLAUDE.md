@@ -1,5 +1,5 @@
 ## Changelog
-After every code change, append a summary of what was changed to `hackcontext.md` using this format:
+After every code change, append a summary of what was changed to `hackcontext.md`
 
 
 
@@ -58,11 +58,12 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - Catch action becomes unreachable.
 - **Implemented in:** Shop inventories, field scripts.
 
-### 4. 7-mon Initial Draft (In Development)
+### 4. 7-mon Initial Draft (Done)
 
-- Replace the Rowan Lab starter script with a "Draft" interface.
-- Ensure the 7 drafted Pokémon are added to the party/PC correctly at start.
-- **Status:** Planning phase.
+- Replaces the Rowan Lab starter script with a "Draft" interface (currently random 7).
+- First 6 added to party; 7th added to PC Box 1.
+- Properly sets OTID and met data for obedience.
+- **Implemented in:** `src/roll_mechanic.c`, `src/scrcmd_party.c`.
 
 ## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
 

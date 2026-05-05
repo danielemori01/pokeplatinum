@@ -1,9 +1,14 @@
 #include "pokemon.h"
 #include "party.h"
+#include "pc_boxes.h"
 #include "savedata.h"
 #include "heap.h"
 #include "math_util.h"
+#include "system_vars.h"
+#include "unk_02054884.h"
+#include "constants/items.h"
 #include "generated/species.h"
+#include "generated/battle_terrains.h"
 
 #define ROLL_SIZE 6
 
@@ -20,31 +25,56 @@ static const u16 sInitialStarterPool[] = {
     SPECIES_STARLY, SPECIES_SHINX, SPECIES_BUIZEL
 };
 
-void StarterDraft_Execute(SaveData *saveData) {
+void StarterDraft_Execute(SaveData *saveData, int metLocation) {
+    if (saveData == NULL) {
+        return;
+    }
+
     Party *party = SaveData_GetParty(saveData);
-    int i, j;
+    if (party == NULL) {
+        return;
+    }
+
+    PCBoxes *pcBoxes = SaveData_GetPCBoxes(saveData);
+    if (pcBoxes == NULL) {
+        return;
+    }
+
+    int i;
+    int poolSize = sizeof(sInitialStarterPool) / sizeof(u16);
+    TrainerInfo *trainerInfo = SaveData_GetTrainerInfo(saveData);
     
-    // For now, we'll just give 6 random mons from the initial pool at level 5
-    // In the future, this will be an interactive draft.
-    for (i = 0; i < 6; i++) {
-        u16 species = sInitialStarterPool[MTRNG_Next() % (sizeof(sInitialStarterPool) / sizeof(u16))];
+    u32 trainerID = TrainerInfo_ID(trainerInfo);
+    
+    for (i = 0; i < 7; i++) {
+        u16 species = sInitialStarterPool[LCRNG_Next() % poolSize];
         
-        // Ensure no repeats in the starting party
-        BOOL repeat = FALSE;
-        for (j = 0; j < i; j++) {
-            if (Pokemon_GetValue(Party_GetPokemonBySlotIndex(party, j), MON_DATA_SPECIES, NULL) == species) {
-                repeat = TRUE;
-                break;
-            }
-        }
-        
-        if (repeat) {
+        // Ensure no repeats in the starting party or PC
+        // (For simplicity, we just check if it's already in the party, 
+        // as the PC is empty at this point, but we could add a PC check if needed)
+        if (Party_HasSpecies(party, species)) {
             i--;
             continue;
         }
 
-        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+        if (i == 0) {
+            VarsFlags *varsFlags = SaveData_GetVarsFlags(saveData);
+            if (varsFlags != NULL) {
+                SystemVars_SetPlayerStarter(varsFlags, species);
+            }
+        }
+
+        Pokemon *mon = Pokemon_New(HEAP_ID_FIELD2);
         Pokemon_Init(mon);
-        Pokemon_InitWithLevel(mon, species, 5, 31, FALSE, 0, 0, 0);
+        Pokemon_InitWith(mon, species, 5, INIT_IVS_RANDOM, FALSE, 0, OTID_SET, trainerID);
+        Pokemon_SetCatchData(mon, trainerInfo, ITEM_POKE_BALL, metLocation, TERRAIN_MAX, HEAP_ID_FIELD2);
+        
+        if (i < 6) {
+            Party_AddPokemon(party, mon);
+        } else {
+            PCBoxes_TryStoreBoxMon(pcBoxes, (BoxPokemon *)mon);
+        }
+        
+        Heap_Free(mon);
     }
 }

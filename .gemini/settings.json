@@ -1,0 +1,17 @@
+{
+  "hooksConfig": {
+    "disabled": [
+      "claude-mem",
+      "claude-mem",
+      "claude-mem",
+      "claude-mem",
+      "claude-mem",
+      "claude-mem",
+      "claude-mem",
+      "maestro-session-start",
+      "maestro-before-agent",
+      "maestro-after-agent",
+      "maestro-session-end"
+    ]
+  }
+}
