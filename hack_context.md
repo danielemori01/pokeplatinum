@@ -55,3 +55,16 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 
 ## Known Issues
 None.
+
+## Changelog (cont.)
+- **Draft menu linker fixes (`src/roll_mechanic.c`):**
+    - Added `#include "field_message.h"` (provides `FieldMessage_FinishedPrinting`).
+    - Replaced undefined `IsPrinterActive` with `FieldMessage_FinishedPrinting`; logic inverted accordingly (`!FieldMessage_FinishedPrinting` to wait while printing).
+    - Replaced undefined `ScriptContext_Resume` with the correct engine pattern: `ScriptContext_Pause(ctx, DraftIsDone)` called in `DraftManager_New`, storing the DraftManager pointer in `ctx->data[0]`.
+    - Added `BOOL done` field to `DraftManager` struct.
+    - `DraftManager_Delete` now sets `dm->done = TRUE` instead of calling Resume; does not free dm.
+    - Added `DraftIsDone(ScriptContext *ctx)` resume callback: frees dm and clears `ctx->data[0]` when done, returning TRUE to unblock the script.
+- **Draft menu input fix (`src/roll_mechanic.c`):**
+    - `LIST_MENU_NO_SELECTION_YET` (0xEEEE) is a user-managed placeholder — `ListMenu_ProcessInput` never returns it. The correct "nothing chosen" value is `MENU_NOTHING_CHOSEN` (-1). The bad check caused every frame to fall through to `currentPool[-1]` (garbage species) and call `DraftManager_AddPokemon` each frame, corrupting party data and crashing the battle.
+    - Fixed: replaced constant check with `(s32)input < 0` which correctly catches both `MENU_NOTHING_CHOSEN` (-1) and `MENU_CANCEL` (-2).
+    - Added bounds guard `index >= DRAFT_POOL_SIZE` for safety.

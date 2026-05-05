@@ -834,6 +834,9 @@ BOOL ScrCmd_ExecuteStarterDraft(ScriptContext *ctx)
     }
 
     int metLocation = MapHeader_GetMapLabelTextID(ctx->fieldSystem->location->mapId);
-    StarterDraft_Execute(ctx->fieldSystem->saveData, metLocation);
+    if (StarterDraft_Execute(ctx, metLocation)) {
+        return TRUE;
+    }
+    
     return FALSE;
 }

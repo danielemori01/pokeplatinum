@@ -132,13 +132,8 @@ SandgemTownLab_OnFrameGetPokedex:
     WaitMovement
     Message SandgemTownLab_Text_LetsHaveALookAtYourPokemon
     CloseMessage
-    FadeScreenOut FADE_SCREEN_SPEED_MEDIUM
-    WaitFadeScreen
     ExecuteStarterDraft
-    FadeScreenIn FADE_SCREEN_SPEED_MEDIUM
-    WaitFadeScreen
-    SetFlag 0x3C2 @ FLAG_SYS_POKEMON_GET
-    SetFlag FLAG_RIVAL_LEFT_HOME
+
     GivePokedex
     SetFlag FLAG_HAS_POKEDEX
     Message SandgemTownLab_Text_PlayerObtainedThePokedex
