@@ -240,6 +240,7 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
     }
     
     Pokedex_Capture(pokedex, mon);
+    Pokedex_ObtainNationalDex(pokedex);
     Heap_Free(mon);
 }
 
