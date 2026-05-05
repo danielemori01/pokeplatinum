@@ -62,7 +62,8 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 
 - Replaces the Rowan Lab starter script with a "Draft" interface (currently random 7).
 - First 6 added to party; 7th added to PC Box 1.
-- Properly sets OTID and met data for obedience.
+- Properly sets OTID and met data for player ownership.
+- Fixed UI glitches (colors/transparency) and Pokédex registration (force-unlocks National Dex).
 - **Implemented in:** `src/roll_mechanic.c`, `src/scrcmd_party.c`.
 
 ## Out of v1 Scope (do not implement until graduated to CLAUDE.md)

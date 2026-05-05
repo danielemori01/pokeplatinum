@@ -2610,7 +2610,8 @@ static int ProcessItemListInput_SellItems(BagController *controller)
             controller->soldItemPrice = Item_LoadParam(controller->bagCtx->selectedItem, ITEM_PARAM_PRICE, HEAP_ID_BAG);
 
             if (Item_LoadParam(controller->bagCtx->selectedItem, ITEM_PARAM_PREVENT_TOSS, HEAP_ID_BAG) != 0
-                || controller->soldItemPrice == 0) {
+                || controller->soldItemPrice == 0
+                || controller->bagCtx->selectedItem == ITEM_RARE_CANDY) {
                 string = MessageLoader_GetNewString(controller->bagStringsLoader, Bag_Text_CantSellItem);
                 StringTemplate_Format(controller->strTemplate, controller->stringBuffer, string);
                 String_Free(string);

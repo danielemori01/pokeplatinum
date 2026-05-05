@@ -23,6 +23,10 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
     - Verified that `Pokemon_InitWith` and `Pokemon_SetCatchData` are correctly using player-specific `TrainerInfo` and `metLocation` data to correctly establish the drafted Pokémon as player-owned.
 - **Fixes:**
     - Resolved `SAVE_TABLE_ENTRY_MAX` mismatch crash in `include/constants/savedata/save_table.h`.
+- **Rare Candies:**
+    - Modified `Shop_GetItemPrice` in `src/overlay007/shop_menu.c` to override price to 0 for `ITEM_RARE_CANDY`, making them free to buy.
+    - Added `ITEM_RARE_CANDY` to `PokeMartCommonItems` in `include/data/mart_items.h` to make them available in all standard Poké Marts.
+    - Modified `ProcessItemListInput_SellItems` in `src/applications/bag/main.c` to prevent selling `ITEM_RARE_CANDY`.
 
 ## Subsystem Details
 

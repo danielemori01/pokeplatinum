@@ -381,7 +381,7 @@ static void Shop_InitContextMenu(ShopMenu *shopMenu)
         shopMenu->optionsList = StringList_New(maxOptions, HEAP_ID_FIELD2);
 
         StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00015, SHOP_STATE_INIT_CAMERA);
-        StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00016, 14);
+        StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00016, 14); // SELL
         StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00017, MENU_CANCEL);
         Window_Add(shopMenu->bgConfig, &shopMenu->windows[0], BG_LAYER_MAIN_3, 1, 1, 13, 6, FIELD_MESSAGE_PALETTE_INDEX, (((1024 - (18 + 12) - 9 - (32 * 8)) - (18 + 12 + 24)) - (27 * 4)) - (13 * 6));
     } else if (shopMenu->martType == MART_TYPE_FRONTIER) {
@@ -428,7 +428,6 @@ static u8 Shop_SelectContextMenu(ShopMenu *shopMenu)
     default:
         return input;
     }
-
     return TRUE;
 }
 
@@ -902,7 +901,9 @@ static u8 Shop_SelectBuyMenu(ShopMenu *shopMenu)
 
         currMoney = Shop_GetCurrentMoney(shopMenu);
 
-        if (currMoney < shopMenu->itemPrice) {
+        // When martType is normal, we need to check if the item is free.
+        // If it is free (price is 0), we don't need to check if player has enough money.
+        if (shopMenu->itemPrice > 0 && currMoney < shopMenu->itemPrice) {
             if (shopMenu->martType == MART_TYPE_FRONTIER) {
                 string = MessageLoader_GetNewString(shopMenu->msgLoader, pl_msg_00000543_00037);
             } else {
@@ -921,10 +922,13 @@ static u8 Shop_SelectBuyMenu(ShopMenu *shopMenu)
             return Shop_ShowPurchaseMessage(shopMenu);
         }
 
-        shopMenu->itemAmountMax = currMoney / shopMenu->itemPrice;
-
-        if (shopMenu->itemAmountMax > 99) {
+        if (shopMenu->itemPrice == 0) {
             shopMenu->itemAmountMax = 99;
+        } else {
+            shopMenu->itemAmountMax = currMoney / shopMenu->itemPrice;
+            if (shopMenu->itemAmountMax > 99) {
+                shopMenu->itemAmountMax = 99;
+            }
         }
 
         Shop_SetItemNameToIndex(shopMenu, shopMenu->itemId, 0);
@@ -1308,6 +1312,9 @@ static void Shop_SetItemNameToIndex(ShopMenu *shopMenu, u16 itemId, u16 idx)
 static u32 Shop_GetItemPrice(ShopMenu *shopMenu, u16 itemId)
 {
     if (shopMenu->martType == MART_TYPE_NORMAL) {
+        if (itemId == ITEM_RARE_CANDY) {
+            return 0; // Rare Candy price set to 0, prevents sale value and makes it free to buy
+        }
         return Item_LoadParam(itemId, ITEM_PARAM_PRICE, HEAP_ID_FIELD2);
     } else if (shopMenu->martType == MART_TYPE_FRONTIER) {
         return Shop_GetItemBPPrice(shopMenu, itemId);

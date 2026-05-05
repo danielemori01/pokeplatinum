@@ -36,7 +36,7 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 2. **Fast Forward / Intro Skip (Done):**
    Bypasses introductory sequence. Player spawns in Rowan's Lab. Starter selection and basic items given immediately.
 
-3. **Post-gym roll (Planned):**
+3. **Post-gym roll (In Development):**
    After each of the 8 gyms, player gets one roll.
 
 4. **In-game trade (Planned):**
@@ -81,7 +81,7 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 
 ## Known Bugs / Future Fixes
 
-- **Player House Cutscene:** Entering the house in Twinleaf Town triggers an out-of-bounds movement script. Needs a state check fix.
+- **Player House Cutscene (Fixed):** Entering the house in Twinleaf Town triggered an out-of-bounds movement script. Resolved by adjusting `VAR_PLAYER_HOUSE_STATE` in the lab script.
 
 ## Versioning Plan
 
