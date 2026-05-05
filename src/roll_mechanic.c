@@ -51,7 +51,6 @@ typedef struct {
     StringList choices[DRAFT_POOL_SIZE + 1];
     String *speciesNames[DRAFT_POOL_SIZE];
     MessageLoader *speciesNameLoader;
-    StringTemplate *stringTemplate;
     int metLocation;
     u32 trainerID;
     TrainerInfo *trainerInfo;
@@ -150,7 +149,6 @@ static DraftManager *DraftManager_New(ScriptContext *ctx, int metLocation) {
     dm->state = DRAFT_STATE_PICK;
     dm->trainerInfo = SaveData_GetTrainerInfo(ctx->fieldSystem->saveData);
     dm->trainerID = TrainerInfo_ID(dm->trainerInfo);
-    dm->stringTemplate = *(StringTemplate **)FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_STR_TEMPLATE);
     
     dm->speciesNameLoader = MessageLoader_Init(MSG_LOADER_PRELOAD_ENTIRE_BANK, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_SPECIES_NAME, HEAP_ID_FIELD1);
     
@@ -163,11 +161,11 @@ static DraftManager *DraftManager_New(ScriptContext *ctx, int metLocation) {
     // Menu window
     Window_Add(ctx->fieldSystem->bgConfig, &dm->menuWindow, 3, 20, 1, 11, DRAFT_POOL_SIZE * 2, 13, 1);
     LoadStandardWindowGraphics(ctx->fieldSystem->bgConfig, 3, 1024 - (18 + 12) - 9, 11, STANDARD_WINDOW_SYSTEM, HEAP_ID_FIELD1);
+    Window_FillTilemap(&dm->menuWindow, 15);
     Window_DrawStandardFrame(&dm->menuWindow, TRUE, 1024 - (18 + 12) - 9, 11);
 
     // Message window
     Window_Add(ctx->fieldSystem->bgConfig, &dm->messageWindow, 3, 2, 19, 27, 4, 13, 1 + (11 * 12));
-    Window_DrawStandardFrame(&dm->messageWindow, TRUE, 1024 - (18 + 12) - 9, 11);
     
     DraftManager_UpdateMenu(dm);
     
@@ -268,8 +266,13 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
     }
     case DRAFT_STATE_SHOW_MESSAGE:
     {
+        Window_FillTilemap(&dm->messageWindow, 15);
+        Window_DrawStandardFrame(&dm->messageWindow, TRUE, 1024 - (18 + 12) - 9, 11);
+
         String *msg = String_Init(128, HEAP_ID_FIELD1);
-        StringTemplate_SetSpeciesNameWithArticleByID(dm->stringTemplate, 1, dm->lastSelectedSpecies);
+        StringTemplate *tempTemplate = StringTemplate_Default(HEAP_ID_FIELD1);
+        StringTemplate_SetSpeciesNameWithArticleByID(tempTemplate, 0, dm->lastSelectedSpecies);
+        StringTemplate_SetSpeciesNameWithArticleByID(tempTemplate, 1, dm->lastSelectedSpecies);
         
         MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_BATTLE_STRINGS, HEAP_ID_FIELD1);
         
@@ -282,13 +285,14 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
         }
         
         String *formatted = String_Init(128, HEAP_ID_FIELD1);
-        StringTemplate_Format(dm->stringTemplate, formatted, msg);
+        StringTemplate_Format(tempTemplate, formatted, msg);
         
         dm->printerID = FieldMessage_Print(&dm->messageWindow, formatted, SaveData_GetOptions(dm->ctx->fieldSystem->saveData), TRUE);
         
         String_Free(msg);
         String_Free(formatted);
         MessageLoader_Free(loader);
+        StringTemplate_Free(tempTemplate);
         dm->state = DRAFT_STATE_WAIT_MESSAGE;
         break;
     }
@@ -298,8 +302,8 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
         }
         
         if (gSystem.pressedKeys & (PAD_BUTTON_A | PAD_BUTTON_B)) {
+            Window_EraseStandardFrame(&dm->messageWindow, FALSE);
             Window_FillTilemap(&dm->messageWindow, 0);
-            Window_DrawStandardFrame(&dm->messageWindow, TRUE, 1024 - (18 + 12) - 9, 11);
             dm->round++;
             if (dm->round < DRAFT_ROUNDS) {
                 dm->state = DRAFT_STATE_PICK;

@@ -68,7 +68,15 @@ None.
     - `LIST_MENU_NO_SELECTION_YET` (0xEEEE) is a user-managed placeholder — `ListMenu_ProcessInput` never returns it. The correct "nothing chosen" value is `MENU_NOTHING_CHOSEN` (-1). The bad check caused every frame to fall through to `currentPool[-1]` (garbage species) and call `DraftManager_AddPokemon` each frame, corrupting party data and crashing the battle.
     - Fixed: replaced constant check with `(s32)input < 0` which correctly catches both `MENU_NOTHING_CHOSEN` (-1) and `MENU_CANCEL` (-2).
     - Added bounds guard `index >= DRAFT_POOL_SIZE` for safety.
-- **Draft message ID fix (`src/roll_mechanic.c`):**
+- **Draft menu ID fix (`src/roll_mechanic.c`):**
     - ID 871 is "Pokémon's data was added to the Pokédex" (explains the `'s …` prefix the user saw), not a caught message.
     - ID 873 is "A sandstorm is raging." (battle weather string), not a sent-to-PC message.
     - Correct IDs: 867 = "Gotcha! {STRVAR_1 1,0,0} was caught!" (party), 869 = "{STRVAR_1 1,0,0} was sent to someone's PC." (box). Both use slot 1, matching `StringTemplate_SetSpeciesNameWithArticleByID(..., 1, species)`.
+- **Draft menu UI and formatting fixes (`src/roll_mechanic.c`):**
+    - Fixed graphical glitches (inverted colors) by switching to palette 13 (standard text palette) for window content and using `Window_FillTilemap` with color 15 (white). This ensures a white background with black text.
+    - Fixed missing Pokémon names in messages by setting both index 0 and 1 in the local `StringTemplate`, ensuring compatibility with the battle string variables.
+    - Optimized message box visibility: the box now only appears when a message is being shown and is erased/transparent during the Pokémon selection phase, preventing an empty box from cluttering the screen.
+- **Fixes:**
+    - Resolved Twinleaf Town out-of-bounds movement crash by changing `VAR_PLAYER_HOUSE_STATE` from 3 to 7 in `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s`. This skips the running shoes cutscene which assumes the player is coming down the stairs, rather than entering from the front door.
+
+
