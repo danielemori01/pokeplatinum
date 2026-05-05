@@ -73,8 +73,20 @@ These are designed but not yet active. See DESIGN.md for full specs:
 - Post-gym rolls
 - In-game trade replacement
 - Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
+### 5. Free Rare Candies (Done)
+
+- Every Poké Mart sells Rare Candies for 0 ¥.
+- Rare Candies are unsellable.
+- **Implemented in:** `src/overlay007/shop_menu.c`, `include/data/mart_items.h`, `src/applications/bag/main.c`.
+
+## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
+
+These are designed but not yet active. See DESIGN.md for full specs:
+
+- Post-gym rolls
+- In-game trade replacement
+- Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
 - Combat bag disable
-- Free unsellable Rare Candies
 - HM overhaul (Machete etc.)
 - Stat-based ban algorithm
 - Visible locked box memorial UI
