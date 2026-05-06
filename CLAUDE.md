@@ -72,6 +72,13 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - Rare Candies are unsellable.
 - **Implemented in:** `src/overlay007/shop_menu.c`, `include/data/mart_items.h`, `src/applications/bag/main.c`.
 
+### 6. Combat Bag Disable (Done)
+
+- The player's bag menu is disabled inside battles.
+- Triggers an alert message if the player tries to access the bag.
+- AI partners and enemies are unaffected.
+- **Implemented in:** `src/battle/battle_controller_player.c`.
+
 ## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
 
 These are designed but not yet active. See DESIGN.md for full specs:
@@ -79,7 +86,6 @@ These are designed but not yet active. See DESIGN.md for full specs:
 - Post-gym rolls
 - In-game trade replacement
 - Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
-- Combat bag disable
 - HM overhaul (Machete etc.)
 - Stat-based ban algorithm
 - Visible locked box memorial UI

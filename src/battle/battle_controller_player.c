@@ -461,7 +461,8 @@ static void BattleControllerPlayer_CommandSelectionInput(BattleSystem *battleSys
                     break;
 
                 case PLAYER_INPUT_ITEM:
-                    if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_NO_ITEMS) {
+                    if (BattlerData_GetBootState(BattleSystem_GetBattlerData(battleSys, i)) != BATTLER_BOOT_STATE_AI
+                        || (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_NO_ITEMS)) {
                         msg.id = 593; // "Items can’t be used here."
                         msg.tags = TAG_NONE;
                         BattleController_EmitSetAlertMessage(battleSys, i, msg);

@@ -23,6 +23,10 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
     - Verified that `Pokemon_InitWith` and `Pokemon_SetCatchData` are correctly using player-specific `TrainerInfo` and `metLocation` data to correctly establish the drafted Pokémon as player-owned.
 - **Fixes:**
     - Resolved `SAVE_TABLE_ENTRY_MAX` mismatch crash in `include/constants/savedata/save_table.h`.
+- **Combat Bag Disable:**
+    - Modified `BattleControllerPlayer_CommandSelectionInput` in `src/battle/battle_controller_player.c` to intercept `PLAYER_INPUT_ITEM` for non-AI battlers.
+    - Triggers a "Items can’t be used here." alert message instead of opening the bag menu.
+    - AI-controlled partners and enemies are still permitted to use items if not otherwise restricted by battle type.
 - **Rare Candies:**
     - Modified `Shop_GetItemPrice` in `src/overlay007/shop_menu.c` to override price to 0 for `ITEM_RARE_CANDY`, making them free to buy.
     - Added `ITEM_RARE_CANDY` to `PokeMartCommonItems` in `include/data/mart_items.h` to make them available in all standard Poké Marts.
@@ -60,6 +64,12 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 | `src/roll_mechanic.c` | Refactored `StarterDraft_Execute` to manually initialize and add Pokémon to the party, bypassing `SaveData_UpdateCatchRecords` to prevent a crash when the Pokédex is not yet initialized. |
 | `src/roll_mechanic.c` | Increased draft to 7 Pokémon; the 7th Pokémon is sent to the PC (Box 1). |
 | `src/roll_mechanic.c` | Fixed Pokémon obedience by properly setting the player's OTID and met terrain (`TERRAIN_MAX`) for drafted Pokémon. |
+
+### Combat Bag Disable
+
+| File | Change |
+| --- | --- |
+| `src/battle/battle_controller_player.c` | Intercept `PLAYER_INPUT_ITEM` for human players and show alert 593. |
 
 ## Known Issues
 None.
