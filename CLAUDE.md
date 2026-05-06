@@ -66,13 +66,6 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - Fixed UI glitches (colors/transparency) and Pokédex registration (force-unlocks National Dex).
 - **Implemented in:** `src/roll_mechanic.c`, `src/scrcmd_party.c`.
 
-## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
-
-These are designed but not yet active. See DESIGN.md for full specs:
-
-- Post-gym rolls
-- In-game trade replacement
-- Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
 ### 5. Free Rare Candies (Done)
 
 - Every Poké Mart sells Rare Candies for 0 ¥.

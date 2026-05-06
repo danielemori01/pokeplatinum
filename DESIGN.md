@@ -63,7 +63,7 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 - The player's bag menu is disabled inside battles.
 - Held items continue to function normally.
 
-## Economy (Planned)
+## Economy (Done)
 
 - Every Poké Mart sells Rare Candies for 0 ¥.
 - Rare Candies are unsellable.
