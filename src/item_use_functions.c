@@ -58,6 +58,7 @@
 #include "terrain_collision_manager.h"
 #include "unk_0203C954.h"
 #include "unk_0203D1B8.h"
+#include "applications/town_map/main.h"
 #include "unk_0205F180.h"
 #include "unk_0206B9D8.h"
 #include "vars_flags.h"
@@ -74,6 +75,7 @@ void *FieldSystem_OpenTownMapItem(FieldSystem *fieldSystem);
 static void ItemUseContext_InitForDistortionWorld(FieldSystem *fieldSystem, ItemUseContext *usageContext);
 static void UseHealingItemFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseTownMapFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
+static void UseHangGliderFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseExplorerKitFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseBicycleFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseJournalFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
@@ -162,6 +164,7 @@ static const ItemUseFuncDat sItemUseFuncs[] = {
     [ITEM_USE_FUNC_AZURE_FLUTE]  = { UseAzureFluteFromMenu,  UseAzureFluteInField,  CanUseAzureFlute  },
     [ITEM_USE_FUNC_VS_RECORDER]  = { UseVsRecorderFromMenu,  UseVsRecorderInField,  NULL              },
     [ITEM_USE_FUNC_GRACIDEA]     = { UseGracideaFromMenu,    UseGracideaInField,    NULL              },
+    [ITEM_USE_FUNC_HANG_GLIDER]  = { UseHangGliderFromMenu,  NULL,                  NULL              },
 };
 // clang-format on
 
@@ -329,6 +332,21 @@ static BOOL UseTownMapInField(ItemFieldUseContext *usageContext)
 {
     RegisteredItem_CreateGoToAppTask(usageContext, sub_02068708);
     return TRUE;
+}
+
+static void UseHangGliderFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
+{
+    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
+    StartMenu *menu = FieldTask_GetEnv(usageContext->fieldTask);
+
+    u32 *slot = Heap_Alloc(HEAP_ID_FIELD2, sizeof(u32));
+    *slot = 0;
+    menu->additionalTaskContext = slot;
+
+    menu->taskData = Heap_Alloc(HEAP_ID_FIELD2, sizeof(TownMapContext));
+    TownMapContext_Init(fieldSystem, menu->taskData, TOWN_MAP_MODE_FLY);
+    FieldSystem_OpenTownMap(fieldSystem, menu->taskData);
+    StartMenu_SetCallback(menu, StartMenu_FlyDestinationSelected);
 }
 
 static void *sub_02068708(void *fieldSystem)

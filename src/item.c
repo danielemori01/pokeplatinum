@@ -2833,6 +2833,54 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = secret_key_NCLR,
         .gen3ID = GBA_ITEM_SECRET_KEY,
     },
+    [ITEM_TM93] = {
+        .dataID = 0x1BE,
+        .iconID = tm_NCGR,
+        .paletteID = tm_normal_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM94] = {
+        .dataID = 0x1BF,
+        .iconID = tm_NCGR,
+        .paletteID = tm_flying_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM95] = {
+        .dataID = 0x1C0,
+        .iconID = tm_NCGR,
+        .paletteID = tm_water_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM96] = {
+        .dataID = 0x1C1,
+        .iconID = tm_NCGR,
+        .paletteID = tm_normal_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM97] = {
+        .dataID = 0x1C2,
+        .iconID = tm_NCGR,
+        .paletteID = tm_flying_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM98] = {
+        .dataID = 0x1C3,
+        .iconID = tm_NCGR,
+        .paletteID = tm_fighting_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM99] = {
+        .dataID = 0x1C4,
+        .iconID = tm_NCGR,
+        .paletteID = tm_water_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_TM100] = {
+        .dataID = 0x1C5,
+        .iconID = tm_NCGR,
+        .paletteID = tm_normal_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
@@ -2928,14 +2976,25 @@ static const u16 sTMHMMoves[] = {
     [TMHM_ID(TM90)] = MOVE_SUBSTITUTE,
     [TMHM_ID(TM91)] = MOVE_FLASH_CANNON,
     [TMHM_ID(TM92)] = MOVE_TRICK_ROOM,
-    [TMHM_ID(HM01)] = MOVE_CUT,
-    [TMHM_ID(HM02)] = MOVE_FLY,
-    [TMHM_ID(HM03)] = MOVE_SURF,
-    [TMHM_ID(HM04)] = MOVE_STRENGTH,
-    [TMHM_ID(HM05)] = MOVE_DEFOG,
-    [TMHM_ID(HM06)] = MOVE_ROCK_SMASH,
-    [TMHM_ID(HM07)] = MOVE_WATERFALL,
-    [TMHM_ID(HM08)] = MOVE_ROCK_CLIMB,
+    [TMHM_ID(HM01)] = MOVE_NONE,
+    [TMHM_ID(HM02)] = MOVE_NONE,
+    [TMHM_ID(HM03)] = MOVE_NONE,
+    [TMHM_ID(HM04)] = MOVE_NONE,
+    [TMHM_ID(HM05)] = MOVE_NONE,
+    [TMHM_ID(HM06)] = MOVE_NONE,
+    [TMHM_ID(HM07)] = MOVE_NONE,
+    [TMHM_ID(HM08)] = MOVE_NONE,
+};
+
+static const u16 sNewTMMoves[] = {
+    MOVE_CUT,        // TM93
+    MOVE_FLY,        // TM94
+    MOVE_SURF,       // TM95
+    MOVE_STRENGTH,   // TM96
+    MOVE_DEFOG,      // TM97
+    MOVE_ROCK_SMASH, // TM98
+    MOVE_WATERFALL,  // TM99
+    MOVE_ROCK_CLIMB, // TM100
 };
 
 const u16 sMailItemIDs[] = {
@@ -3298,12 +3357,13 @@ static s32 ItemPartyParam_Get(ItemPartyParam *partyParam, enum ItemDataParam att
 
 const u16 Item_MoveForTMHM(u16 item)
 {
-    if (item < ITEM_TM01 || item > ITEM_HM08) {
-        return MOVE_NONE;
+    if (item >= ITEM_TM01 && item <= ITEM_HM08) {
+        return sTMHMMoves[item - ITEM_TM01];
     }
-
-    item -= ITEM_TM01;
-    return sTMHMMoves[item];
+    if (item >= FIRST_NEW_TM_IDX && item <= LAST_NEW_TM_IDX) {
+        return sNewTMMoves[item - FIRST_NEW_TM_IDX];
+    }
+    return MOVE_NONE;
 }
 
 u8 Item_IsHMMove(u16 move)
@@ -3319,11 +3379,13 @@ u8 Item_IsHMMove(u16 move)
 
 u8 Item_TMHMNumber(u16 item)
 {
-    if (item < ITEM_TM01 || item > ITEM_HM08) {
-        return ITEM_NONE;
+    if (item >= ITEM_TM01 && item <= ITEM_HM08) {
+        return item - ITEM_TM01;
     }
-
-    return item - ITEM_TM01;
+    if (item >= FIRST_NEW_TM_IDX && item <= LAST_NEW_TM_IDX) {
+        return TMHM_ID(HM01) + (item - FIRST_NEW_TM_IDX);
+    }
+    return ITEM_NONE;
 }
 
 u8 Item_IsMail(u16 item)

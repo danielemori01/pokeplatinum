@@ -2,6 +2,8 @@
 
 #include <nitro.h>
 
+#include "item.h"
+
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_stats.h"
 
@@ -70,11 +72,7 @@ u16 GetNumberDigitCount(u32 number)
 
 u16 Item_IsTMHM(u16 item)
 {
-    if (item >= ITEM_TM01 && item <= ITEM_HM08) {
-        return TRUE;
-    }
-
-    return FALSE;
+    return Item_LoadParam(item, ITEM_PARAM_FIELD_POCKET, HEAP_ID_FIELD2) == POCKET_TMHMS;
 }
 
 u16 Pokedex_GetRatingMessageID_Local(u16 pokemonSeen, u16 reachedEternaCity)

@@ -3270,65 +3270,57 @@
     {
       "id": "pl_msg_00000391_00420",
       "en_US": [
-        "The foe is cut with a scythe or a claw.\n",
-        "It can also be used to cut down thin\n",
-        "trees."
+        "A blade for clearing thin trees\n",
+        "and overgrown paths."
       ]
     },
     {
       "id": "pl_msg_00000391_00421",
       "en_US": [
-        "The user soars, then strikes on the\n",
-        "second turn. It can also be used to\n",
-        "fly to any familiar town."
+        "A glider for soaring to any\n",
+        "previously visited town."
       ]
     },
     {
       "id": "pl_msg_00000391_00422",
       "en_US": [
-        "It swamps the entire battlefield with\n",
-        "a giant wave. It can also be used\n",
-        "to cross water."
+        "A board for crossing water\n",
+        "surfaces."
       ]
     },
     {
       "id": "pl_msg_00000391_00423",
       "en_US": [
-        "The foe is slugged with a punch thrown\n",
-        "at maximum power. It can also be used\n",
-        "to move boulders."
+        "A belt that lets you push\n",
+        "heavy boulders."
       ]
     },
     {
       "id": "pl_msg_00000391_00424",
       "en_US": [
-        "Obstacles are moved, reducing the\n",
-        "foe’s evasion stat. It can also be\n",
-        "used to clear deep fog."
+        "A fan that clears heavy fog\n",
+        "from an area."
       ]
     },
     {
       "id": "pl_msg_00000391_00425",
       "en_US": [
-        "The user slugs the foe with a\n",
-        "shattering punch. It can also smash\n",
-        "cracked boulders."
+        "A pick for smashing\n",
+        "breakable rocks."
       ]
     },
     {
       "id": "pl_msg_00000391_00426",
       "en_US": [
-        "The user charges the foe at an\n",
-        "awesome speed. It can also be used\n",
-        "to climb a waterfall."
+        "Grips for ascending\n",
+        "waterfalls."
       ]
     },
     {
       "id": "pl_msg_00000391_00427",
       "en_US": [
-        "A charging attack that may also leave\n",
-        "the foe confused. It can also be used\n",
-        "to scale rocky walls."
+        "Climbing gear for scaling\n",
+        "rocky walls."
       ]
     },
     {
@@ -3645,6 +3637,62 @@
         "A high-tech key that has to be used at\n",
         "a specific location. It emits a special\n",
         "electric signal to open a door."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00468",
+      "en_US": [
+        "Teaches Cut to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00469",
+      "en_US": [
+        "Teaches Fly to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00470",
+      "en_US": [
+        "Teaches Surf to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00471",
+      "en_US": [
+        "Teaches Strength to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00472",
+      "en_US": [
+        "Teaches Defog to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00473",
+      "en_US": [
+        "Teaches Rock Smash to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00474",
+      "en_US": [
+        "Teaches Waterfall to a\n",
+        "compatible Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00475",
+      "en_US": [
+        "Teaches Rock Climb to a\n",
+        "compatible Pokémon."
       ]
     }
   ]

@@ -1683,35 +1683,35 @@
     },
     {
       "id": "pl_msg_00000392_00420",
-      "en_US": "HM01"
+      "en_US": "Machete"
     },
     {
       "id": "pl_msg_00000392_00421",
-      "en_US": "HM02"
+      "en_US": "Hang Glider"
     },
     {
       "id": "pl_msg_00000392_00422",
-      "en_US": "HM03"
+      "en_US": "Surfboard"
     },
     {
       "id": "pl_msg_00000392_00423",
-      "en_US": "HM04"
+      "en_US": "Power Belt"
     },
     {
       "id": "pl_msg_00000392_00424",
-      "en_US": "HM05"
+      "en_US": "Defogger"
     },
     {
       "id": "pl_msg_00000392_00425",
-      "en_US": "HM06"
+      "en_US": "Pickaxe"
     },
     {
       "id": "pl_msg_00000392_00426",
-      "en_US": "HM07"
+      "en_US": "Clamp"
     },
     {
       "id": "pl_msg_00000392_00427",
-      "en_US": "HM08"
+      "en_US": "Pitons"
     },
     {
       "id": "pl_msg_00000392_00428",
@@ -1872,6 +1872,38 @@
     {
       "id": "pl_msg_00000392_00467",
       "en_US": "Secret Key"
+    },
+    {
+      "id": "pl_msg_00000392_00468",
+      "en_US": "TM93"
+    },
+    {
+      "id": "pl_msg_00000392_00469",
+      "en_US": "TM94"
+    },
+    {
+      "id": "pl_msg_00000392_00470",
+      "en_US": "TM95"
+    },
+    {
+      "id": "pl_msg_00000392_00471",
+      "en_US": "TM96"
+    },
+    {
+      "id": "pl_msg_00000392_00472",
+      "en_US": "TM97"
+    },
+    {
+      "id": "pl_msg_00000392_00473",
+      "en_US": "TM98"
+    },
+    {
+      "id": "pl_msg_00000392_00474",
+      "en_US": "TM99"
+    },
+    {
+      "id": "pl_msg_00000392_00475",
+      "en_US": "TM100"
     }
   ]
 }
