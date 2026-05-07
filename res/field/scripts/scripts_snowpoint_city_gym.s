@@ -33,6 +33,7 @@ SnowpointGym_Candice:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_ICICLE
+    ExecuteGymRoll -1, 50
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_ACE_TRAINER_SERGIO
     SetTrainerFlag TRAINER_ACE_TRAINER_ISAIAH

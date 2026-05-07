@@ -41,6 +41,9 @@ typedef struct {
     ScriptContext *ctx;
     DraftState state;
     int round;
+    int rounds;
+    int targetSlot;
+    int level;
     u16 currentPool[DRAFT_POOL_SIZE];
     u16 *selectedOptionPtr;
     SysTask *sysTask;
@@ -139,13 +142,16 @@ static void DraftManager_GeneratePool(DraftManager *dm) {
     }
 }
 
-static DraftManager *DraftManager_New(ScriptContext *ctx, int metLocation) {
+static DraftManager *DraftManager_New(ScriptContext *ctx, int metLocation, int rounds, int targetSlot, int level) {
     DraftManager *dm = Heap_Alloc(HEAP_ID_FIELD1, sizeof(DraftManager));
     memset(dm, 0, sizeof(DraftManager));
     
     dm->ctx = ctx;
     dm->metLocation = metLocation;
     dm->round = 0;
+    dm->rounds = rounds;
+    dm->targetSlot = targetSlot;
+    dm->level = level;
     dm->state = DRAFT_STATE_PICK;
     dm->trainerInfo = SaveData_GetTrainerInfo(ctx->fieldSystem->saveData);
     dm->trainerID = TrainerInfo_ID(dm->trainerInfo);
@@ -221,7 +227,7 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
     PCBoxes *pcBoxes = SaveData_GetPCBoxes(saveData);
     Pokedex *pokedex = SaveData_GetPokedex(saveData);
     
-    if (dm->round == 0) {
+    if (dm->round == 0 && dm->targetSlot == -1) {
         VarsFlags *varsFlags = SaveData_GetVarsFlags(saveData);
         if (varsFlags != NULL) {
             SystemVars_SetPlayerStarter(varsFlags, species);
@@ -230,13 +236,21 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
 
     Pokemon *mon = Pokemon_New(HEAP_ID_FIELD2);
     Pokemon_Init(mon);
-    Pokemon_InitWith(mon, species, 5, INIT_IVS_RANDOM, FALSE, 0, OTID_SET, dm->trainerID);
+    Pokemon_InitWith(mon, species, dm->level, INIT_IVS_RANDOM, FALSE, 0, OTID_SET, dm->trainerID);
     Pokemon_SetCatchData(mon, dm->trainerInfo, ITEM_POKE_BALL, dm->metLocation, TERRAIN_MAX, HEAP_ID_FIELD2);
     
-    if (dm->round < 6) {
-        Party_AddPokemon(party, mon);
+    if (dm->targetSlot == -1) {
+        if (dm->round < 6) {
+            Party_AddPokemon(party, mon);
+        } else {
+            PCBoxes_TryStoreBoxMon(pcBoxes, (BoxPokemon *)mon);
+        }
     } else {
-        PCBoxes_TryStoreBoxMon(pcBoxes, (BoxPokemon *)mon);
+        if (dm->targetSlot < Party_GetCurrentCount(party)) {
+            Party_AddPokemonBySlotIndex(party, dm->targetSlot, mon);
+        } else {
+            Party_AddPokemon(party, mon);
+        }
     }
     
     Pokedex_Capture(pokedex, mon);
@@ -279,7 +293,7 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
         
         MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_BATTLE_STRINGS, HEAP_ID_FIELD1);
         
-        if (dm->round < 6) {
+        if (dm->targetSlot != -1 || dm->round < 6) {
             // ID 867: "Gotcha! {STRVAR_1 1, 0, 0} was caught!"
             MessageLoader_GetString(loader, 867, msg);
         } else {
@@ -308,7 +322,7 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
             Window_EraseStandardFrame(&dm->messageWindow, FALSE);
             Window_FillTilemap(&dm->messageWindow, 0);
             dm->round++;
-            if (dm->round < DRAFT_ROUNDS) {
+            if (dm->round < dm->rounds) {
                 dm->state = DRAFT_STATE_PICK;
                 DraftManager_GeneratePool(dm);
                 DraftManager_UpdateMenu(dm);
@@ -353,6 +367,11 @@ static BOOL DraftIsDone(ScriptContext *ctx) {
 }
 
 BOOL StarterDraft_Execute(ScriptContext *ctx, int metLocation) {
-    DraftManager_New(ctx, metLocation);
+    DraftManager_New(ctx, metLocation, DRAFT_ROUNDS, -1, 5);
+    return TRUE;
+}
+
+BOOL GymRoll_Execute(ScriptContext *ctx, int metLocation, int targetSlot, int level) {
+    DraftManager_New(ctx, metLocation, 1, targetSlot, level);
     return TRUE;
 }

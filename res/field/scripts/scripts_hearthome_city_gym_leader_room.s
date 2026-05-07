@@ -69,6 +69,7 @@ HearthomeGym_FantinaMain:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_RELIC
+    ExecuteGymRoll -1, 30
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_CAMPER_DREW
     SetTrainerFlag TRAINER_ACE_TRAINER_ALLEN

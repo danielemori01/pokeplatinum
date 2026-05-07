@@ -840,3 +840,20 @@ BOOL ScrCmd_ExecuteStarterDraft(ScriptContext *ctx)
     
     return FALSE;
 }
+
+BOOL ScrCmd_ExecuteGymRoll(ScriptContext *ctx)
+{
+    if (ctx == NULL || ctx->fieldSystem == NULL || ctx->fieldSystem->location == NULL) {
+        return FALSE;
+    }
+
+    u16 targetSlot = ScriptContext_GetVar(ctx);
+    u16 level = ScriptContext_GetVar(ctx);
+    int metLocation = MapHeader_GetMapLabelTextID(ctx->fieldSystem->location->mapId);
+
+    if (GymRoll_Execute(ctx, metLocation, (int)targetSlot, (int)level)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}

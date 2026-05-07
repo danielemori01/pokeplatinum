@@ -74,6 +74,7 @@ EternaGym_Gardenia:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_FOREST
+    ExecuteGymRoll -1, 25
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_AROMA_LADY_JENNA
     SetTrainerFlag TRAINER_AROMA_LADY_ANGELA

@@ -4996,6 +4996,12 @@
     .short SCRCMD_EXECUTESTARTERDRAFT
     .endm
 
+    .macro ExecuteGymRoll targetSlot, level
+    .short SCRCMD_EXECUTEGYMROLL
+    .short \targetSlot
+    .short \level
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

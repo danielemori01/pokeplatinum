@@ -846,6 +846,7 @@ ScriptCommand(SCRCMD_BUFFERBALLSEALNAMEPLURAL,                             ScrCm
 ScriptCommand(SCRCMD_CAPITALIZEFIRSTLETTER,                                ScrCmd_CapitalizeFirstLetter)
 ScriptCommand(SCRCMD_BUFFERFLOORNUMBER,                                    ScrCmd_BufferFloorNumber)
 ScriptCommand(SCRCMD_EXECUTESTARTERDRAFT,                                  ScrCmd_ExecuteStarterDraft)
+ScriptCommand(SCRCMD_EXECUTEGYMROLL,                                     ScrCmd_ExecuteGymRoll)
 
 // clang-format on
 

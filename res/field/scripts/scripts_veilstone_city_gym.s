@@ -32,6 +32,7 @@ VeilstoneGym_Maylene:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_COBBLE
+    ExecuteGymRoll -1, 35
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_BLACK_BELT_COLBY
     SetTrainerFlag TRAINER_BLACK_BELT_DARREN

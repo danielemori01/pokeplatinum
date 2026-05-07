@@ -23,6 +23,10 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
     - Verified that `Pokemon_InitWith` and `Pokemon_SetCatchData` are correctly using player-specific `TrainerInfo` and `metLocation` data to correctly establish the drafted Pokémon as player-owned.
 - **Fixes:**
     - Resolved `SAVE_TABLE_ENTRY_MAX` mismatch crash in `include/constants/savedata/save_table.h`.
+- **Combat Bag Disable:**
+    - Modified `BattleControllerPlayer_CommandSelectionInput` in `src/battle/battle_controller_player.c` to intercept `PLAYER_INPUT_ITEM` for non-AI battlers.
+    - Triggers a "Items can’t be used here." alert message instead of opening the bag menu.
+    - AI-controlled partners and enemies are still permitted to use items if not otherwise restricted by battle type.
 - **Rare Candies:**
     - Modified `Shop_GetItemPrice` in `src/overlay007/shop_menu.c` to override price to 0 for `ITEM_RARE_CANDY`, making them free to buy.
     - Added `ITEM_RARE_CANDY` to `PokeMartCommonItems` in `include/data/mart_items.h` to make them available in all standard Poké Marts.
@@ -61,8 +65,47 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 | `src/roll_mechanic.c` | Increased draft to 7 Pokémon; the 7th Pokémon is sent to the PC (Box 1). |
 | `src/roll_mechanic.c` | Fixed Pokémon obedience by properly setting the player's OTID and met terrain (`TERRAIN_MAX`) for drafted Pokémon. |
 
+### Combat Bag Disable
+
+| File | Change |
+| --- | --- |
+| `src/battle/battle_controller_player.c` | Intercept `PLAYER_INPUT_ITEM` for human players and show alert 593. |
+
 ## Known Issues
 None.
+
+## Changelog (cont.)
+- **Field move text updated to key item names (`res/text/field_moves.json`):**
+    - All interaction prompts and action messages updated to use key item names instead of move names: Cut→Machete, Rock Smash→Pickaxe, Strength→Power Belt, Surf→Surfboard, Defog→Defogger, Rock Climb→Pitons, Waterfall→Clamp.
+    - "Used X!" messages no longer reference Pokémon names since moves no longer do the action.
+    - No-item error messages also updated to name the required key item.
+
+## Changelog (cont.)
+- **TM93–TM100 renamed:**
+    - Updated `res/text/item_names.json`: TM93→"TM93 Cut", TM94→"TM94 Fly", TM95→"TM95 Surf", TM96→"TM96 Strength", TM97→"TM97 Defog", TM98→"TM98 Rock Smash", TM99→"TM99 Waterfall", TM100→"TM100 Rock Climb".
+- **Auto-give TM when HM key item received:**
+    - Modified `ScrCmd_AddItem` in `src/scrcmd_item.c`: after any `AddItem` script command that gives ITEM_HM01–ITEM_HM08, the corresponding TM93–TM100 is also silently added to the bag. Mapping is `ITEM_TM93 + (item - ITEM_HM01)`. Added `#include "constants/items.h"` for the item constants.
+
+## Changelog (cont.)
+- **Combat Bag Disable (re-enabled):**
+    - In `src/battle/battle_controller_player.c` (`BattleControllerPlayer_CommandSelectionInput`), changed the `PLAYER_INPUT_ITEM` block condition from `BATTLE_TYPE_NO_ITEMS` only to also trigger when the battler's boot state is not `BATTLER_BOOT_STATE_AI`. Human players always see "Items can't be used here." (message 593); AI-controlled partners can still use items normally.
+
+## Changelog (cont.)
+- **HM Key Item Overhaul:**
+    - Converted all 8 HM items (ITEM_HM01–ITEM_HM08) from POCKET_TMHMS to POCKET_KEY_ITEMS in `res/items/pl_item_data.csv`. ITEM_USE_FUNC changed to ITEM_USE_FUNC_NONE for HM01/HM03–HM08; HM02 uses ITEM_USE_FUNC_HANG_GLIDER.
+    - Renamed items in `res/text/item_names.json`: HM01→Machete, HM02→Hang Glider, HM03→Surfboard, HM04→Power Belt, HM05→Defogger, HM06→Pickaxe, HM07→Clamp, HM08→Pitons.
+    - Updated item descriptions in `res/text/item_descriptions.json` to match new key item identities.
+    - Added ITEM_USE_FUNC_HANG_GLIDER = 25, FIRST_NEW_TM_IDX, LAST_NEW_TM_IDX to `include/constants/items.h`.
+    - Nulled out TMHM_ID(HM01)–TMHM_ID(HM08) entries in `src/item.c` sTMHMMoves (HMs no longer teach moves). Added sNewTMMoves[] for TM93–TM100. Updated Item_MoveForTMHM and Item_TMHMNumber to handle both old and new TM ranges.
+    - Zeroed out the 8 HM entries in sFieldMoves[] in `src/applications/party_menu/main.c` (MOVE_NONE for CUT through ROCK_CLIMB). HM field moves no longer appear as party menu options.
+    - Updated `src/unk_0205DFC4.c` Item_IsTMHM to use pocket-based check (POCKET_TMHMS) so TM93–TM100 are recognized as TMs despite non-contiguous IDs.
+    - Implemented UseHangGliderFromMenu in `src/item_use_functions.c`: opens the town map in TOWN_MAP_MODE_FLY. Added ITEM_USE_FUNC_HANG_GLIDER entry to sItemUseFuncs. Added #include for applications/town_map/main.h.
+    - Updated `res/field/scripts/scripts_field_moves.s`: replaced FindPartySlotWithMove + GoToIfEq 6 (move-based eligibility checks) with CheckItem ITEM_HMxx + GoToIfEq 0 (key item checks) for all 6 obstacle-based HMs (Cut, Rock Smash, Strength, Rock Climb, Defog, Waterfall). Added Surfboard item check at the top of FieldMoves_Water (it had no script-level eligibility check before). In execute blocks, replaced FindPartySlotWithMove + SetVar + BufferPartyMonNickname with SetVar 0 + BufferPartyMonNickname 0 (uses party slot 0 for animation).
+- **New TM93–TM100 (HM moves as TMs):**
+    - Added ITEM_TM93–ITEM_TM100 to `generated/items.txt` (after ITEM_SECRET_KEY, before MAX_ITEMS).
+    - Added CSV rows in `res/items/pl_item_data.csv` and name/description entries in `res/text/item_names.json` and `item_descriptions.json`.
+    - TM93→Cut, TM94→Fly, TM95→Surf, TM96→Strength, TM97→Defog, TM98→Rock Smash, TM99→Waterfall, TM100→Rock Climb. Item_TMHMNumber maps TM93–TM100 to the former HM01–HM08 learnset bits (reuse), so all species that could learn each HM can now learn the corresponding TM.
+    - Added sItemArchiveIDs entries for ITEM_TM93–ITEM_TM100 in `src/item.c` with dataIDs 0x1BE–0x1C5 (sequential NARC members after ITEM_SECRET_KEY at 0x1BD). This was the root cause of the battle-entry crash: ItemTable_Load calls Item_FileID(NUM_ITEMS, ...) = sItemArchiveIDs[475] which was out-of-bounds, producing a garbage maxItem, crashing the battle heap allocator (OS_Panic in ITCM at 0x01FF802C).
 
 ## Changelog (cont.)
 - **Draft menu linker fixes (`src/roll_mechanic.c`):**
@@ -90,5 +133,43 @@ None.
     - Verified that `Pokemon_InitWith` and `Pokemon_SetCatchData` are correctly using player-specific `TrainerInfo` and `metLocation` data to correctly establish the drafted Pokémon as player-owned.
 - **Fixes:**
     - Resolved Twinleaf Town out-of-bounds movement crash by changing `VAR_PLAYER_HOUSE_STATE` from 3 to 7 in `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s`. This skips the running shoes cutscene which assumes the player is coming down the stairs, rather than entering from the front door.
+- **HM Key Item Overhaul:**
+    - Converted all 8 HM items (ITEM_HM01–ITEM_HM08) from POCKET_TMHMS to POCKET_KEY_ITEMS in `res/items/pl_item_data.csv`. ITEM_USE_FUNC changed to ITEM_USE_FUNC_NONE (not usable from bag menu) for all except HM02.
+    - Renamed items in `res/text/item_names.json`: HM01→Machete, HM02→Hang Glider, HM03→Surfboard, HM04→Power Belt, HM05→Defogger, HM06→Pickaxe, HM07→Clamp, HM08→Pitons.
+    - Updated item descriptions in `res/text/item_descriptions.json` to match new key item identities.
+    - Nulled out TMHM_ID(HM01)–TMHM_ID(HM08) entries in `src/item.c` sTMHMMoves (dead code since HMs are no longer TM/HM pocket items).
+    - Zeroed out the 8 HM entries in sFieldMoves[] in `src/applications/party_menu/main.c` (MOVE_NONE for CUT through ROCK_CLIMB and FLY). HM field moves no longer appear as party menu options.
+    - Added ITEM_USE_FUNC_HANG_GLIDER = 25 to `include/constants/items.h`.
+    - Implemented UseHangGliderFromMenu in `src/item_use_functions.c`: opens the town map in TOWN_MAP_MODE_FLY so the player can fly to visited towns by using the Hang Glider from the Key Items pocket. Added ITEM_USE_FUNC_HANG_GLIDER entry to sItemUseFuncs table. Added #include for applications/town_map/main.h.
+    - Updated `res/field/scripts/scripts_field_moves.s`: replaced FindPartySlotWithMove + GoToIfEq 6 (move-based eligibility checks) with CheckItem ITEM_HMxx + GoToIfEq 0 (key item checks) for all 7 obstacle-based HMs (Cut, Rock Smash, Strength, Rock Climb, Surf, Defog, Waterfall). In the execute blocks, replaced second FindPartySlotWithMove + SetVar + BufferPartyMonNickname with SetVar 0 + BufferPartyMonNickname 0 (uses party slot 0 for animation). Added Surfboard/Clamp item checks at the top of FieldMoves_Water and FieldMoves_Waterfall scripts (they had no script-level eligibility check before). Badge requirements preserved unchanged.
+- **New TM93–TM100 (HM moves as TMs):**
+    - Added ITEM_TM93–ITEM_TM100 to `generated/items.txt` (IDs 468–475, after ITEM_SECRET_KEY). These are regular POCKET_TMHMS items with ITEM_USE_FUNC_TM_HM, price 3000.
+    - Added CSV rows in `res/items/pl_item_data.csv` and name/description entries in `res/text/item_names.json` and `item_descriptions.json` (NARC indices 468–475).
+    - Added `[TMHM_ID(TM93)]`–`[TMHM_ID(TM100)]` entries to sTMHMMoves in `src/item.c`: TM93→Cut, TM94→Fly, TM95→Surf, TM96→Strength, TM97→Defog, TM98→Rock Smash, TM99→Waterfall, TM100→Rock Climb.
+    - Reverted the 8 previously displaced TMs back to their original moves: TM21→Frustration, TM43→Secret Power, TM49→Snatch, TM54→False Swipe, TM58→Endure, TM67→Recycle, TM78→Captivate, TM83→Natural Gift.
+    - Modified `Item_IsTMHM` in `src/unk_0205DFC4.c` to use pocket-based check (`Item_LoadParam(..., ITEM_PARAM_FIELD_POCKET) == POCKET_TMHMS`) instead of ID range, so TM93–TM100 are recognized as TMs despite non-contiguous IDs. Added `#include "item.h"`.
+    - Added `FIRST_NEW_TM_IDX` and `LAST_NEW_TM_IDX` constants to `include/constants/items.h`. Updated `Item_MoveForTMHM` and `Item_TMHMNumber` in `src/item.c` to accept both the original TM01–HM08 range and the new TM93–TM100 range.
+- **Test warp fixes + Surf test NPC (iteration 2):**
+    - `res/field/scripts/scripts_sandgem_town.s`: Changed waterfall test warp target from `MAP_HEADER_MT_CORONET_1F_NORTH_ROOM_2` to `MAP_HEADER_ROUTE_224` at (908, 500) — an outdoor waterfall, no dungeon. Added new `SandgemTown_TestWarpSurf` script (ScriptEntry index 13) that warps to `MAP_HEADER_ROUTE_219` at (179, 867) — the ocean beach south of Sandgem where Surf can be triggered.
+    - `res/field/events/events_sandgem_town.json`: Added `LOCALID_TEST_WARP_SURF` pokeball NPC at (172, 843) with `script: 14`. The existing waterfall pokeball stays at (171, 843).
+    - `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s`: Added `AddItem ITEM_MAX_REPEL, 5, VAR_RESULT` to the test items block so the player starts with 5 Max Repels to suppress wild encounters during testing.
+- **Surf/Waterfall C-level gate fix (`src/overlay005/field_control.c`):**
+    - The tile-interaction A-button handler had two gates before firing global script 10004 (Surf): `TrainerInfo_HasBadge(info, 3)` (Fen Badge) AND `Party_HasMonWithMove(party, MOVE_SURF)`. Both always failed — no party Pokémon has MOVE_SURF since HMs no longer teach moves. Removed both checks; `PlayerAvatar_CanUseSurf` tile check alone now suffices. All item/badge validation is handled by the script itself.
+    - The movement-based waterfall trigger (walking into a waterfall tile while surfing) was gated by `Party_HasMonWithMove(party, MOVE_WATERFALL)`. Removed that check; the flag is now always set and the tile behavior determines whether it fires.
+- **Surf warp fix (iteration 3):**
+    - Surf test warp changed from MAP_HEADER_ROUTE_219 (all ocean — player landed on water, Surf trigger requires standing on land) to MAP_HEADER_SANDGEM_TOWN at (180, 866) DIR_SOUTH — the last sand tile at the south shore, adjacent to Route 219 ocean. Pressing A facing south from here fires FieldMoves_Water.
 
 
+- **Post-Gym Draft Rolls (v2):**
+    - Registered `SCRCMD_EXECUTEGYMROLL` in `include/data/scripts/scrcmd.h`.
+    - Added `ExecuteGymRoll` macro to `asm/macros/scrcmd.inc`.
+    - Injected `ExecuteGymRoll` into all 8 gym leader scripts after the badge is awarded:
+        - Roark: Level 15
+        - Gardenia: Level 25
+        - Fantina: Level 30
+        - Maylene: Level 35
+        - Crasher Wake: Level 40
+        - Byron: Level 45
+        - Candice: Level 50
+        - Volkner: Level 55
+    - The rolls use `targetSlot -1` to automatically add the Pokémon to the party or PC.

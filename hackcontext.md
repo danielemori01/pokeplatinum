@@ -159,3 +159,17 @@ None.
 - **Surf warp fix (iteration 3):**
     - Surf test warp changed from MAP_HEADER_ROUTE_219 (all ocean — player landed on water, Surf trigger requires standing on land) to MAP_HEADER_SANDGEM_TOWN at (180, 866) DIR_SOUTH — the last sand tile at the south shore, adjacent to Route 219 ocean. Pressing A facing south from here fires FieldMoves_Water.
 
+
+- **Post-Gym Draft Rolls (v2):**
+    - Registered `SCRCMD_EXECUTEGYMROLL` in `include/data/scripts/scrcmd.h`.
+    - Added `ExecuteGymRoll` macro to `asm/macros/scrcmd.inc`.
+    - Injected `ExecuteGymRoll` into all 8 gym leader scripts after the badge is awarded:
+        - Roark: Level 15
+        - Gardenia: Level 25
+        - Fantina: Level 30
+        - Maylene: Level 35
+        - Crasher Wake: Level 40
+        - Byron: Level 45
+        - Candice: Level 50
+        - Volkner: Level 55
+    - The rolls use `targetSlot -1` to automatically add the Pokémon to the party or PC.
