@@ -60,6 +60,7 @@ typedef struct {
     u8 printerID;
     u16 lastSelectedSpecies;
     BOOL done;
+    BOOL sentToPC;
 } DraftManager;
 
 // Comprehensive base-form pool (Gen 1-4, excluding legendaries/mythicals)
@@ -240,10 +241,11 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
     Pokemon_SetCatchData(mon, dm->trainerInfo, ITEM_POKE_BALL, dm->metLocation, TERRAIN_MAX, HEAP_ID_FIELD2);
     
     if (dm->targetSlot == -1) {
-        if (dm->round < 6) {
-            Party_AddPokemon(party, mon);
+        if (Party_AddPokemon(party, mon)) {
+            dm->sentToPC = FALSE;
         } else {
-            PCBoxes_TryStoreBoxMon(pcBoxes, (BoxPokemon *)mon);
+            PCBoxes_TryStoreBoxMon(pcBoxes, &mon->box);
+            dm->sentToPC = TRUE;
         }
     } else {
         if (dm->targetSlot < Party_GetCurrentCount(party)) {
@@ -251,6 +253,7 @@ static void DraftManager_AddPokemon(DraftManager *dm, u16 species) {
         } else {
             Party_AddPokemon(party, mon);
         }
+        dm->sentToPC = FALSE;
     }
     
     Pokedex_Capture(pokedex, mon);
@@ -293,7 +296,7 @@ static void SysTask_DraftCallback(SysTask *task, void *data) {
         
         MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_BATTLE_STRINGS, HEAP_ID_FIELD1);
         
-        if (dm->targetSlot != -1 || dm->round < 6) {
+        if (!dm->sentToPC) {
             // ID 867: "Gotcha! {STRVAR_1 1, 0, 0} was caught!"
             MessageLoader_GetString(loader, 867, msg);
         } else {

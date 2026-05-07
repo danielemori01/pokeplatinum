@@ -847,7 +847,7 @@ BOOL ScrCmd_ExecuteGymRoll(ScriptContext *ctx)
         return FALSE;
     }
 
-    u16 targetSlot = ScriptContext_GetVar(ctx);
+    s16 targetSlot = (s16)ScriptContext_GetVar(ctx);
     u16 level = ScriptContext_GetVar(ctx);
     int metLocation = MapHeader_GetMapLabelTextID(ctx->fieldSystem->location->mapId);
 

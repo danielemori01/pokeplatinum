@@ -175,3 +175,7 @@ None.
     - The rolls use `targetSlot -1` to automatically add the Pokémon to the party or PC.
 - **Post-Gym Roll level scaling updated:**
     - Roll levels changed to match each gym leader's ace Pokémon: Roark→14 (Cranidos), Gardenia→22 (Roserade), Fantina→26 (Mismagius), Maylene→32 (Lucario), Wake→37 (Floatzel), Byron→41 (Bastiodon), Candice→44 (Froslass), Volkner→50 (Electivire).
+- **Post-Gym Roll party-full and message bugs fixed:**
+    - `ScrCmd_ExecuteGymRoll` in `src/scrcmd_party.c` was reading `targetSlot` as `u16`, so `-1` from the script arrived as `0xFFFF` (65535). The `dm->targetSlot == -1` check never fired, routing every roll into the specific-slot branch which ignored the `Party_AddPokemon` return value and always set `sentToPC = FALSE`.
+    - Fixed by casting `ScriptContext_GetVar` result to `s16` so -1 is preserved.
+    - `DraftManager_AddPokemon` in `src/roll_mechanic.c` now uses `Party_AddPokemon`'s return value to decide party-vs-box (returns FALSE when full), sets `dm->sentToPC` accordingly, and calls `PCBoxes_TryStoreBoxMon(&mon->box)` on full party.
