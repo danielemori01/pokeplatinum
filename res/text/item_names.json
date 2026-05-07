@@ -1875,35 +1875,35 @@
     },
     {
       "id": "pl_msg_00000392_00468",
-      "en_US": "TM93"
+      "en_US": "TM93 Cut"
     },
     {
       "id": "pl_msg_00000392_00469",
-      "en_US": "TM94"
+      "en_US": "TM94 Fly"
     },
     {
       "id": "pl_msg_00000392_00470",
-      "en_US": "TM95"
+      "en_US": "TM95 Surf"
     },
     {
       "id": "pl_msg_00000392_00471",
-      "en_US": "TM96"
+      "en_US": "TM96 Strength"
     },
     {
       "id": "pl_msg_00000392_00472",
-      "en_US": "TM97"
+      "en_US": "TM97 Defog"
     },
     {
       "id": "pl_msg_00000392_00473",
-      "en_US": "TM98"
+      "en_US": "TM98 Rock Smash"
     },
     {
       "id": "pl_msg_00000392_00474",
-      "en_US": "TM99"
+      "en_US": "TM99 Waterfall"
     },
     {
       "id": "pl_msg_00000392_00475",
-      "en_US": "TM100"
+      "en_US": "TM100 Rock Climb"
     }
   ]
 }

@@ -75,6 +75,12 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 None.
 
 ## Changelog (cont.)
+- **TM93–TM100 renamed:**
+    - Updated `res/text/item_names.json`: TM93→"TM93 Cut", TM94→"TM94 Fly", TM95→"TM95 Surf", TM96→"TM96 Strength", TM97→"TM97 Defog", TM98→"TM98 Rock Smash", TM99→"TM99 Waterfall", TM100→"TM100 Rock Climb".
+- **Auto-give TM when HM key item received:**
+    - Modified `ScrCmd_AddItem` in `src/scrcmd_item.c`: after any `AddItem` script command that gives ITEM_HM01–ITEM_HM08, the corresponding TM93–TM100 is also silently added to the bag. Mapping is `ITEM_TM93 + (item - ITEM_HM01)`. Added `#include "constants/items.h"` for the item constants.
+
+## Changelog (cont.)
 - **Combat Bag Disable (re-enabled):**
     - In `src/battle/battle_controller_player.c` (`BattleControllerPlayer_CommandSelectionInput`), changed the `PLAYER_INPUT_ITEM` block condition from `BATTLE_TYPE_NO_ITEMS` only to also trigger when the battler's boot state is not `BATTLER_BOOT_STATE_AI`. Human players always see "Items can't be used here." (message 593); AI-controlled partners can still use items normally.
 

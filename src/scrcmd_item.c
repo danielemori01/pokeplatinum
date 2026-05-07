@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "constants/heap.h"
+#include "constants/items.h"
 
 #include "field/field_system.h"
 
@@ -20,7 +21,13 @@ BOOL ScrCmd_AddItem(ScriptContext *ctx)
     u16 count = ScriptContext_GetVar(ctx);
     u16 *destVar = ScriptContext_GetVarPointer(ctx);
 
-    *destVar = Bag_TryAddItem(SaveData_GetBag(fieldSystem->saveData), item, count, HEAP_ID_FIELD1);
+    Bag *bag = SaveData_GetBag(fieldSystem->saveData);
+    *destVar = Bag_TryAddItem(bag, item, count, HEAP_ID_FIELD1);
+
+    if (item >= ITEM_HM01 && item <= ITEM_HM08) {
+        Bag_TryAddItem(bag, ITEM_TM93 + (item - ITEM_HM01), 1, HEAP_ID_FIELD1);
+    }
+
     return FALSE;
 }
 
