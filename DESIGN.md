@@ -58,7 +58,7 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 - Poké Balls (all variants) are removed from the game entirely. Not in shops, not as field items, not from NPCs.
 - Wild battles still occur normally for XP.
 
-## Combat Bag Restriction (Done)
+## Combat Bag Restriction (Planned)
 
 - The player's bag menu is disabled inside battles.
 - Held items continue to function normally.
