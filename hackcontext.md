@@ -75,6 +75,10 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 None.
 
 ## Changelog (cont.)
+- **Combat Bag Disable (re-enabled):**
+    - In `src/battle/battle_controller_player.c` (`BattleControllerPlayer_CommandSelectionInput`), changed the `PLAYER_INPUT_ITEM` block condition from `BATTLE_TYPE_NO_ITEMS` only to also trigger when the battler's boot state is not `BATTLER_BOOT_STATE_AI`. Human players always see "Items can't be used here." (message 593); AI-controlled partners can still use items normally.
+
+## Changelog (cont.)
 - **HM Key Item Overhaul:**
     - Converted all 8 HM items (ITEM_HM01–ITEM_HM08) from POCKET_TMHMS to POCKET_KEY_ITEMS in `res/items/pl_item_data.csv`. ITEM_USE_FUNC changed to ITEM_USE_FUNC_NONE for HM01/HM03–HM08; HM02 uses ITEM_USE_FUNC_HANG_GLIDER.
     - Renamed items in `res/text/item_names.json`: HM01→Machete, HM02→Hang Glider, HM03→Surfboard, HM04→Power Belt, HM05→Defogger, HM06→Pickaxe, HM07→Clamp, HM08→Pitons.
