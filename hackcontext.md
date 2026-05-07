@@ -149,4 +149,13 @@ None.
     - Reverted the 8 previously displaced TMs back to their original moves: TM21→Frustration, TM43→Secret Power, TM49→Snatch, TM54→False Swipe, TM58→Endure, TM67→Recycle, TM78→Captivate, TM83→Natural Gift.
     - Modified `Item_IsTMHM` in `src/unk_0205DFC4.c` to use pocket-based check (`Item_LoadParam(..., ITEM_PARAM_FIELD_POCKET) == POCKET_TMHMS`) instead of ID range, so TM93–TM100 are recognized as TMs despite non-contiguous IDs. Added `#include "item.h"`.
     - Added `FIRST_NEW_TM_IDX` and `LAST_NEW_TM_IDX` constants to `include/constants/items.h`. Updated `Item_MoveForTMHM` and `Item_TMHMNumber` in `src/item.c` to accept both the original TM01–HM08 range and the new TM93–TM100 range.
+- **Test warp fixes + Surf test NPC (iteration 2):**
+    - `res/field/scripts/scripts_sandgem_town.s`: Changed waterfall test warp target from `MAP_HEADER_MT_CORONET_1F_NORTH_ROOM_2` to `MAP_HEADER_ROUTE_224` at (908, 500) — an outdoor waterfall, no dungeon. Added new `SandgemTown_TestWarpSurf` script (ScriptEntry index 13) that warps to `MAP_HEADER_ROUTE_219` at (179, 867) — the ocean beach south of Sandgem where Surf can be triggered.
+    - `res/field/events/events_sandgem_town.json`: Added `LOCALID_TEST_WARP_SURF` pokeball NPC at (172, 843) with `script: 14`. The existing waterfall pokeball stays at (171, 843).
+    - `res/field/scripts/scripts_sandgem_town_pokemon_research_lab.s`: Added `AddItem ITEM_MAX_REPEL, 5, VAR_RESULT` to the test items block so the player starts with 5 Max Repels to suppress wild encounters during testing.
+- **Surf/Waterfall C-level gate fix (`src/overlay005/field_control.c`):**
+    - The tile-interaction A-button handler had two gates before firing global script 10004 (Surf): `TrainerInfo_HasBadge(info, 3)` (Fen Badge) AND `Party_HasMonWithMove(party, MOVE_SURF)`. Both always failed — no party Pokémon has MOVE_SURF since HMs no longer teach moves. Removed both checks; `PlayerAvatar_CanUseSurf` tile check alone now suffices. All item/badge validation is handled by the script itself.
+    - The movement-based waterfall trigger (walking into a waterfall tile while surfing) was gated by `Party_HasMonWithMove(party, MOVE_WATERFALL)`. Removed that check; the flag is now always set and the tile behavior determines whether it fires.
+- **Surf warp fix (iteration 3):**
+    - Surf test warp changed from MAP_HEADER_ROUTE_219 (all ocean — player landed on water, Surf trigger requires standing on land) to MAP_HEADER_SANDGEM_TOWN at (180, 866) DIR_SOUTH — the last sand tile at the south shore, adjacent to Route 219 ocean. Pressing A facing south from here fires FieldMoves_Water.
 

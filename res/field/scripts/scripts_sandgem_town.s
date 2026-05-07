@@ -15,6 +15,8 @@
     ScriptEntry SandgemTown_LandmarkSignCounterpartMailbox
     ScriptEntry SandgemTown_LandmarkSignPokeMart
     ScriptEntry SandgemTown_LandmarkSignPokemonCenter
+    ScriptEntry SandgemTown_TestWarpWaterfall
+    ScriptEntry SandgemTown_TestWarpSurf
     ScriptEntryEnd
 
 SandgemTown_OnTransition:
@@ -697,6 +699,18 @@ SandgemTown_LandmarkSignPokeMart:
 
 SandgemTown_LandmarkSignPokemonCenter:
     ShowLandmarkSign SandgemTown_Text_PokemonCenterSign
+    End
+
+SandgemTown_TestWarpWaterfall:
+    LockAll
+    FacePlayer
+    Warp MAP_HEADER_ROUTE_224, 0, 908, 500, DIR_NORTH
+    End
+
+SandgemTown_TestWarpSurf:
+    LockAll
+    FacePlayer
+    Warp MAP_HEADER_SANDGEM_TOWN, 0, 180, 866, DIR_SOUTH
     End
 
     .balign 4, 0
