@@ -173,3 +173,5 @@ None.
         - Candice: Level 50
         - Volkner: Level 55
     - The rolls use `targetSlot -1` to automatically add the Pokémon to the party or PC.
+- **Post-Gym Roll level scaling updated:**
+    - Roll levels changed to match each gym leader's ace Pokémon: Roark→14 (Cranidos), Gardenia→22 (Roserade), Fantina→26 (Mismagius), Maylene→32 (Lucario), Wake→37 (Floatzel), Byron→41 (Bastiodon), Candice→44 (Froslass), Volkner→50 (Electivire).

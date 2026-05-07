@@ -29,7 +29,7 @@ CanalaveGym_Byron:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_MINE
-    ExecuteGymRoll -1, 45
+    ExecuteGymRoll -1, 41
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_BLACK_BELT_DAVID
     SetTrainerFlag TRAINER_WORKER_JACKSON

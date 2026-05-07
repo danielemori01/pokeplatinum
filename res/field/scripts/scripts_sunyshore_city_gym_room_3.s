@@ -38,7 +38,7 @@ SunyshoreGymRoom3_Volkner:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_BEACON
-    ExecuteGymRoll -1, 55
+    ExecuteGymRoll -1, 50
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_ACE_TRAINER_ZACHERY
     SetTrainerFlag TRAINER_ACE_TRAINER_DESTINY
