@@ -145,6 +145,12 @@ SandgemTownLab_OnFrameGetPokedex:
     GiveJournal
     AddItem ITEM_PARCEL, 1, VAR_RESULT
     SetFlag FLAG_RECEIVED_PARCEL
+    AddItem ITEM_HM01, 1, VAR_RESULT
+    AddItem ITEM_HM04, 1, VAR_RESULT
+    AddItem ITEM_HM06, 1, VAR_RESULT
+    GiveBadge BADGE_ID_FOREST
+    GiveBadge BADGE_ID_COAL
+    GiveBadge BADGE_ID_MINE
     SetVar VAR_SANDGEM_TOWN_LAB_STATE, 1
     SetVar VAR_SANDGEM_TOWN_STATE, 2
     SetVar VAR_ROUTE_202_STATE, 0

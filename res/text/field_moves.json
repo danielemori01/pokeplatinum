@@ -5,12 +5,12 @@
       "id": "FieldMoves_Text_WouldYouLikeToUseCut",
       "en_US": [
         "This tree looks like it can be\n",
-        "cut down! Would you like to cut it?"
+        "cut down! Would you like to use the Machete?"
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedCut",
-      "en_US": "{STRVAR_1 0, 0, 0} used Cut!\r"
+      "en_US": "Used the Machete!\r"
     },
     {
       "id": "FieldMoves_Text_TreeLooksLikeCanBeCut",
@@ -23,26 +23,25 @@
       "id": "FieldMoves_Text_WouldYouLikeToUseRockSmash",
       "en_US": [
         "This rock appears to be breakable.\n",
-        "Would you like to use Rock Smash?"
+        "Would you like to use the Pickaxe?"
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonMayBeAbleToSmashRock",
       "en_US": [
-        "It’s a rugged rock, but a Pokémon\n",
-        "may be able to smash it."
+        "It’s a rugged rock.\n",
+        "You’ll need a Pickaxe to smash it."
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedRockSmash",
-      "en_US": "{STRVAR_1 0, 0, 0} used Rock Smash!\r"
+      "en_US": "Used the Pickaxe!\r"
     },
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseStrength",
       "en_US": [
-        "It’s a big boulder, but a Pokémon\n",
-        "may be able to push it aside.\r",
-        "Would you like to use Strength?"
+        "It’s a big boulder.\r",
+        "Would you like to use the Power Belt?"
       ]
     },
     {
@@ -52,99 +51,99 @@
     {
       "id": "FieldMoves_Text_BoulderMayBeAbleToPush",
       "en_US": [
-        "It’s a big boulder, but a Pokémon\n",
-        "may be able to push it aside."
+        "It’s a big boulder.\n",
+        "You’ll need a Power Belt to move it."
       ]
     },
     {
       "id": "FieldMoves_Text_StrengthMadePossibleToMove",
       "en_US": [
-        "Strength made it possible to move\n",
-        "boulders around."
+        "The Power Belt made it possible\n",
+        "to move boulders around."
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedStrength",
-      "en_US": "{STRVAR_1 0, 0, 0} used Strength!\r"
+      "en_US": "Used the Power Belt!\r"
     },
     {
       "id": "FieldMoves_Text_PokemonStrengthMadePossibleToMove",
       "en_US": [
-        "{STRVAR_1 0, 0, 0}’s Strength made it\n",
-        "possible to move boulders around!"
+        "The Power Belt made it possible\n",
+        "to move boulders around!"
       ]
     },
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseSurf",
       "en_US": [
         "The water is a deep blue color...\n",
-        "Would you like to surf on it?"
+        "Would you like to use the Surfboard?"
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedSurf",
-      "en_US": "{STRVAR_1 0, 0, 0} used Surf!\r"
+      "en_US": "Used the Surfboard!\r"
     },
     {
       "id": "FieldMoves_Text_NoSurfingWithPartner",
       "en_US": [
-        "Surf can’t be used if you have\n",
-        "someone with you."
+        "The Surfboard can’t be used if you\n",
+        "have someone with you."
       ]
     },
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseDefog_Unused",
       "en_US": [
         "A deep fog drapes the area...\n",
-        "Would you like to use Defog?"
+        "Would you like to use the Defogger?"
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedDefog",
-      "en_US": "{STRVAR_1 0, 0, 0} used Defog!\r"
+      "en_US": "Used the Defogger!\r"
     },
     {
       "id": "FieldMoves_Text_DeepFogDrapesArea_Unused",
       "en_US": [
         "A deep fog drapes the area...\n",
-        "Will a Pokémon’s move lift it?"
+        "Will the Defogger lift it?"
       ]
     },
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseRockClimb",
       "en_US": [
         "The wall is very rocky...\n",
-        "Would you like to use Rock Climb?"
+        "Would you like to use the Pitons?"
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedRockClimb",
-      "en_US": "{STRVAR_1 0, 0, 0} used Rock Climb!\r"
+      "en_US": "Used the Pitons!\r"
     },
     {
       "id": "FieldMoves_Text_RockyWallWillMoveScale",
       "en_US": [
         "The wall is very rocky...\n",
-        "Will a Pokémon’s move scale it?"
+        "Will the Pitons scale it?"
       ]
     },
     {
       "id": "FieldMoves_Text_NoRockClimbingWithPartner",
       "en_US": [
-        "Rock Climb can’t be used if you have\n",
-        "someone with you."
+        "The Pitons can’t be used if you\n",
+        "have someone with you."
       ]
     },
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseWaterfall",
       "en_US": [
         "It’s a large waterfall.\n",
-        "Would you like to use Waterfall?"
+        "Would you like to use the Clamp?"
       ]
     },
     {
       "id": "FieldMoves_Text_PokemonUsedWaterfall",
-      "en_US": "{STRVAR_1 0, 0, 0} used Waterfall.\r"
+      "en_US": "Used the Clamp!\r"
     },
     {
       "id": "FieldMoves_Text_WallOfWater",

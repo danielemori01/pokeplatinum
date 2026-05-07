@@ -75,6 +75,12 @@ Reference document for all intentional modifications to the vanilla decomp. Use 
 None.
 
 ## Changelog (cont.)
+- **Field move text updated to key item names (`res/text/field_moves.json`):**
+    - All interaction prompts and action messages updated to use key item names instead of move names: Cut→Machete, Rock Smash→Pickaxe, Strength→Power Belt, Surf→Surfboard, Defog→Defogger, Rock Climb→Pitons, Waterfall→Clamp.
+    - "Used X!" messages no longer reference Pokémon names since moves no longer do the action.
+    - No-item error messages also updated to name the required key item.
+
+## Changelog (cont.)
 - **TM93–TM100 renamed:**
     - Updated `res/text/item_names.json`: TM93→"TM93 Cut", TM94→"TM94 Fly", TM95→"TM95 Surf", TM96→"TM96 Strength", TM97→"TM97 Defog", TM98→"TM98 Rock Smash", TM99→"TM99 Waterfall", TM100→"TM100 Rock Climb".
 - **Auto-give TM when HM key item received:**
