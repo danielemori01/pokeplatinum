@@ -1,8 +1,10 @@
 #include "roll_mechanic.h"
 #include <nitro.h>
 #include <string.h>
+#include "constants/pokemon.h"
 #include "pokemon.h"
 #include "party.h"
+#include "trainer_info.h"
 #include "pc_boxes.h"
 #include "savedata.h"
 #include "heap.h"
@@ -29,6 +31,26 @@
 
 #define DRAFT_POOL_SIZE 6
 #define DRAFT_ROUNDS 7
+
+static const u8 sLevelCaps[] = {
+    14, // 0 badges: Roark     (Cranidos  L14)
+    22, // 1 badge:  Gardenia   (Roserade  L22)
+    26, // 2 badges: Fantina    (Mismagius L26)
+    32, // 3 badges: Maylene    (Lucario   L32)
+    37, // 4 badges: Wake       (Floatzel  L37)
+    41, // 5 badges: Byron      (Bastiodon L41)
+    44, // 6 badges: Candice    (Froslass  L44)
+    50, // 7 badges: Volkner    (Electivire L50)
+};
+
+u8 LevelCap_Get(const TrainerInfo *info)
+{
+    int badges = TrainerInfo_BadgeCount(info);
+    if (badges >= 8) {
+        return MAX_POKEMON_LEVEL;
+    }
+    return sLevelCaps[badges];
+}
 
 typedef enum {
     DRAFT_STATE_PICK,

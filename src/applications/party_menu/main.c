@@ -46,6 +46,8 @@
 #include "overlay_manager.h"
 #include "party.h"
 #include "pokemon.h"
+#include "roll_mechanic.h"
+#include "save_player.h"
 #include "render_window.h"
 #include "screen_fade.h"
 #include "sound.h"
@@ -2700,28 +2702,38 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
         return 6;
     }
 
-    if (Party_CheckItemEffectsOnMember(app->partyMenu->party, app->partyMenu->usedItemID, app->currPartySlot, 0, HEAP_ID_PARTY_MENU) == 1) {
-        Bag_TryRemoveItem(app->partyMenu->bag, app->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
-
-        if (Item_Get(itemData, ITEM_PARAM_EVOLVE) != 0) {
-            Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
-
-            app->partyMenu->evoTargetSpecies = Pokemon_GetEvolutionTargetSpecies(NULL, mon, EVO_CLASS_BY_ITEM, app->partyMenu->usedItemID, &app->partyMenu->evoType);
-            app->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_EVOLVE_BY_ITEM;
-            Heap_Free(itemData);
-            return 32;
+    {
+        int itemCanBeUsed = (Party_CheckItemEffectsOnMember(app->partyMenu->party, app->partyMenu->usedItemID, app->currPartySlot, 0, HEAP_ID_PARTY_MENU) == 1);
+        if (itemCanBeUsed && Item_Get(itemData, ITEM_PARAM_LEVEL_UP)) {
+            Pokemon *capMon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+            TrainerInfo *capInfo = SaveData_GetTrainerInfo(FieldSystem_GetSaveData(app->partyMenu->fieldSystem));
+            if (Pokemon_GetValue(capMon, MON_DATA_LEVEL, NULL) >= LevelCap_Get(capInfo)) {
+                itemCanBeUsed = 0;
+            }
         }
+        if (itemCanBeUsed) {
+            Bag_TryRemoveItem(app->partyMenu->bag, app->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
 
-        if ((Item_IsHerbalMedicine(app->partyMenu->usedItemID) == 1) && (app->partyMenu->broadcast != NULL)) {
-            Pokemon *v2 = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
-            FieldSystem_SaveTVSegment_HerbalMedicineTrainerSightingDummy(app->partyMenu->broadcast, v2, app->partyMenu->usedItemID);
+            if (Item_Get(itemData, ITEM_PARAM_EVOLVE) != 0) {
+                Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+
+                app->partyMenu->evoTargetSpecies = Pokemon_GetEvolutionTargetSpecies(NULL, mon, EVO_CLASS_BY_ITEM, app->partyMenu->usedItemID, &app->partyMenu->evoType);
+                app->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_EVOLVE_BY_ITEM;
+                Heap_Free(itemData);
+                return 32;
+            }
+
+            if ((Item_IsHerbalMedicine(app->partyMenu->usedItemID) == 1) && (app->partyMenu->broadcast != NULL)) {
+                Pokemon *v2 = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+                FieldSystem_SaveTVSegment_HerbalMedicineTrainerSightingDummy(app->partyMenu->broadcast, v2, app->partyMenu->usedItemID);
+            }
+
+            sub_020852B8(app);
+        } else {
+            PartyMenu_PrintLongMessage(app, PartyMenu_Text_ItWontHaveAnyEffect, TRUE);
+            app->currPartySlot = 7;
+            app->unk_B00 = sub_02085348;
         }
-
-        sub_020852B8(app);
-    } else {
-        PartyMenu_PrintLongMessage(app, PartyMenu_Text_ItWontHaveAnyEffect, TRUE);
-        app->currPartySlot = 7;
-        app->unk_B00 = sub_02085348;
     }
 
     Heap_Free(itemData);

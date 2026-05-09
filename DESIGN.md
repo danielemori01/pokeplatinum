@@ -30,14 +30,14 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 
 ### When a roll happens
 
-1. **Initial draft (Planned):**
+1. **Initial draft (Done):**
    Sequential rolls at game start, replacing the starter briefcase. Player builds their starting party from these rolls.
 
 2. **Fast Forward / Intro Skip (Done):**
    Bypasses introductory sequence. Player spawns in Rowan's Lab. Starter selection and basic items given immediately.
 
-3. **Post-gym roll (In Development):**
-   After each of the 8 gyms, player gets one roll.
+3. **Post-gym roll (Done):**
+   After each of the 8 gyms, player gets one roll. Level scales to the gym leader's ace Pokémon.
 
 4. **In-game trade (Planned):**
    NPC trades are replaced by rolls.
@@ -58,20 +58,23 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 - Poké Balls (all variants) are removed from the game entirely. Not in shops, not as field items, not from NPCs.
 - Wild battles still occur normally for XP.
 
-## Combat Bag Restriction (Planned)
+## Combat Bag Restriction (Done)
 
 - The player's bag menu is disabled inside battles.
 - Held items continue to function normally.
+- **Implemented in:** `src/battle/battle_controller_player.c`.
 
 ## Economy (Done)
 
 - Every Poké Mart sells Rare Candies for 0 ¥.
 - Rare Candies are unsellable.
 
-## HM Overhaul (Planned)
+## HM Overhaul (Done)
 
-- HMs are replaced with Key Items (e.g., "Machete" for Cut).
+- HMs replaced with Key Items: Machete (Cut), Hang Glider (Fly), Surfboard (Surf), Power Belt (Strength), Defogger (Defog), Pickaxe (Rock Smash), Clamp (Waterfall), Pitons (Rock Climb).
 - Field obstacles check for Key Items instead of moves.
+- HM moves still teachable via TM93–TM100 (new POCKET_TMHMS items).
+- **Implemented in:** `res/items/pl_item_data.csv`, `src/item.c`, `src/item_use_functions.c`, `res/field/scripts/scripts_field_moves.s`, and related text/generated files.
 
 ## Open Questions / Decide Before Implementing
 
@@ -87,6 +90,6 @@ A "roll" presents the player with **one pool of 6 species** drawn from the Poké
 
 - **v1 (Done):** Permadeath + Fast Forward / Intro Skip + Poké Ball removal + 7-mon Initial Draft.
 - **v2 (Done):** Post-gym rolls + Combat Bag Disable + free Rare Candies (un-sellable).
-- **v3:** HM Overhaul + event/gift replacement.
-- **v4:** Visible Memorial UI, stat-based ban algorithm, balance pass.
-an algorithm, balance pass.
+- **v3 (Done):** HM Overhaul (key items, TM93–TM100, field script updates).
+- **v4:** Event/gift replacement (in-game trades, Eevee, eggs, Porygon, Giratina, etc.).
+- **v5:** Visible Memorial UI, stat-based ban algorithm, balance pass.

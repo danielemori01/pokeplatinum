@@ -175,6 +175,10 @@ None.
     - The rolls use `targetSlot -1` to automatically add the Pokémon to the party or PC.
 - **Post-Gym Roll level scaling updated:**
     - Roll levels changed to match each gym leader's ace Pokémon: Roark→14 (Cranidos), Gardenia→22 (Roserade), Fantina→26 (Mismagius), Maylene→32 (Lucario), Wake→37 (Floatzel), Byron→41 (Bastiodon), Candice→44 (Froslass), Volkner→50 (Electivire).
+- **Level Cap System:**
+    - Added `LevelCap_Get(const TrainerInfo *info)` in `src/roll_mechanic.c` (exported via `include/roll_mechanic.h`). Returns the max level based on badge count: 0→14, 1→22, 2→26, 3→32, 4→37, 5→41, 6→44, 7→50, 8→100 (uncapped).
+    - `src/battle/battle_script.c` (`BattleScript_GetExpTask`): replaced `!= MAX_POKEMON_LEVEL` EXP gate with `< LevelCap_Get(BattleSystem_GetTrainerInfo(..., BATTLER_US))`. Pokémon at or above the cap receive 0 EXP in battle.
+    - `src/applications/party_menu/main.c` (`ApplyItemEffectOnPokemon`): before consuming the item, checks if it is a level-up item and if the Pokémon is already at the cap. If so, forces `itemCanBeUsed = 0`, triggering the "It won't have any effect" message without removing the Rare Candy from the bag.
 - **Post-Gym Roll party-full and message bugs fixed:**
     - `ScrCmd_ExecuteGymRoll` in `src/scrcmd_party.c` was reading `targetSlot` as `u16`, so `-1` from the script arrived as `0xFFFF` (65535). The `dm->targetSlot == -1` check never fired, routing every roll into the specific-slot branch which ignored the `Party_AddPokemon` return value and always set `sentToPC = FALSE`.
     - Fixed by casting `ScriptContext_GetVar` result to `s16` so -1 is preserved.

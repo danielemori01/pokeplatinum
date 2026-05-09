@@ -70,6 +70,7 @@
 #include "touch_screen.h"
 #include "trainer_data.h"
 #include "trainer_info.h"
+#include "roll_mechanic.h"
 #include "unk_02012744.h"
 #include "unk_0201567C.h"
 #include "unk_0208C098.h"
@@ -9744,7 +9745,8 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
         u32 totalExp = 0;
         msg.id = BattleStrings_Text_PokemonGainedExpPoints; // "{0} gained {1} Exp. Points!"
 
-        if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) != MAX_POKEMON_LEVEL) {
+        if (Pokemon_GetValue(mon, MON_DATA_HP, NULL)
+                && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) < LevelCap_Get(BattleSystem_GetTrainerInfo(data->battleSys, BATTLER_US))) {
             if (data->battleCtx->sideGetExpMask[battler] & FlagIndex(slot)) {
                 totalExp = data->battleCtx->gainedExp;
             }

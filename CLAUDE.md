@@ -3,10 +3,10 @@ After every code change, append a summary of what was changed to `hackcontext.md
 
 
 
-# Pokemon Platinum Decomp Hack — v1 Working Brief
+# Pokemon Platinum Decomp Hack — Working Brief
 
-> Long-term project vision lives in `DESIGN.md`. This file is **only v1 scope.**
-> When a feature finishes v1, update this file. Don't pull from DESIGN.md
+> Long-term project vision lives in `DESIGN.md`. This file tracks active scope.
+> When a feature is done, update this file. Don't pull from DESIGN.md
 > without explicit confirmation from the user.
 
 ## Project
@@ -72,15 +72,33 @@ After ANY edit, run `make`. Report success or paste the actual error. Do not cla
 - Rare Candies are unsellable.
 - **Implemented in:** `src/overlay007/shop_menu.c`, `include/data/mart_items.h`, `src/applications/bag/main.c`.
 
-## Out of v1 Scope (do not implement until graduated to CLAUDE.md)
+### 6. Combat Bag Disable (Done)
+
+- Player's bag menu is blocked in battle; shows "Items can't be used here."
+- AI-controlled partners and enemies are unaffected.
+- **Implemented in:** `src/battle/battle_controller_player.c`.
+
+### 7. Post-Gym Rolls (Done)
+
+- After each of the 8 gyms, player gets one roll via `ExecuteGymRoll`.
+- Roll level scales to the gym leader's ace: Roark→14, Gardenia→22, Fantina→26, Maylene→32, Wake→37, Byron→41, Candice→44, Volkner→50.
+- Party-full case: Pokémon sent to PC Box 1 automatically.
+- **Implemented in:** `src/scrcmd_party.c`, `src/roll_mechanic.c`, all 8 gym leader scripts.
+
+### 8. HM Overhaul (Done)
+
+- All 8 HMs converted to Key Items (Machete, Hang Glider, Surfboard, Power Belt, Defogger, Pickaxe, Clamp, Pitons).
+- Field obstacle scripts check for key items instead of party moves.
+- HM moves teachable via new TM93–TM100 (added to POCKET_TMHMS).
+- Hang Glider opens the Fly map from the Key Items pocket.
+- **Implemented in:** `res/items/pl_item_data.csv`, `src/item.c`, `src/item_use_functions.c`, `src/applications/party_menu/main.c`, `src/unk_0205DFC4.c`, `res/field/scripts/scripts_field_moves.s`, `res/text/item_names.json`, `res/text/item_descriptions.json`, `generated/items.txt`.
+
+## Not Yet Implemented (do not implement without explicit confirmation)
 
 These are designed but not yet active. See DESIGN.md for full specs:
 
-- Post-gym rolls
 - In-game trade replacement
 - Forced gift/event replacement (Eevee, eggs, Porygon, Giratina, etc.)
-- Combat bag disable
-- HM overhaul (Machete etc.)
 - Stat-based ban algorithm
 - Visible locked box memorial UI
 
